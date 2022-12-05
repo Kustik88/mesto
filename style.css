@@ -27,3 +27,29 @@
     margin: 0 auto;
     color: white;
 }
+
+.profile {
+    max-width: 880px;
+    margin: 40px auto 0;
+    display: grid;
+    grid-template-columns: 150px 336px 1fr;
+    grid-template-rows: auto;
+}
+
+.profile__avatar {
+    width: 168.75px;
+    height: 127.5px;
+    grid-column: 1/2;
+    grid-row: 1/2;
+    position: relative;
+    left: -22.5px;
+}
+
+.profile__avatar-img {
+    border-radius: 60px;
+}
+
+.profile__info {
+    
+}
+
