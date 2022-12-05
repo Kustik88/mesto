@@ -1,3 +1,35 @@
+@font-face {
+    font-family: 'Inter';
+    font-style:  normal;
+    font-weight: 100;
+    src: url(./fonts/Inter/Inter-Thin.woff2) format("woff2"),
+         url(./fonts/Inter/Inter-Thin.woff) format("woff");
+  }
+
+@font-face {
+    font-family: 'Inter';
+    font-style:  normal;
+    src: url(./fonts/Inter/Inter-Regular.woff) format('woff'),
+        url(./fontsInter-Regular.woff2) format('woff2');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-style:  normal;
+    font-weight: 700;
+    src: url(./fontsInter-Bold.woff2) format("woff2"),
+         url(./fontsInter-Bold.woff) format("woff");
+  }
+
+@font-face {
+    font-family: 'Inter';
+    font-style:  normal;
+    src: url(./fontsInter-Black.woff) format('woff'),
+        url(./fontsInter-Black.woff2) format('woff2');
+    font-weight: 900;
+}
+
 .page {
     margin: 0 auto;
     background-color: #000000;
@@ -34,6 +66,7 @@
     display: grid;
     grid-template-columns: 150px 336px 1fr;
     grid-template-rows: auto;
+    overflow: visible;
 }
 
 .profile__avatar {
@@ -50,6 +83,69 @@
 }
 
 .profile__info {
-    
+    grid-column: 2/3;
+    grid-row: 1/2;
+    width: 100%;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+    align-content: center;
 }
 
+.profile__owner {
+    max-width: 294px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 42px;
+    line-height: 48px;
+    margin: 0;
+}
+
+.profile__editButton {
+    width: 22px;
+    height: 22px;
+    border: 1px solid #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.profile__editButton-icon {
+    width: 10px;
+    height: 10px;    
+}
+
+.profile__owner-activity {
+    max-width: 100%;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    margin-top: 25px;
+}
+
+.profile__btn-container {
+    grid-column: 3/4;
+    grid-row: 1/2;
+    width: 100%;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+.profile__addButton {
+    width: 146px;
+    height: 46px;
+    border: 2px solid #FFFFFF;
+    border-radius: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile__addButton-icon {
+    width: 14px;
+    height: 14px;
+}
