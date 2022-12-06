@@ -10,7 +10,7 @@
     font-family: 'Inter';
     font-style:  normal;
     src: url(./fonts/Inter/Inter-Regular.woff) format('woff'),
-        url(./fontsInter-Regular.woff2) format('woff2');
+        url(./fonts/Inter/Inter-Regular.woff2) format('woff2');
     font-weight: 400;
 }
 
@@ -18,15 +18,15 @@
     font-family: 'Inter';
     font-style:  normal;
     font-weight: 700;
-    src: url(./fontsInter-Bold.woff2) format("woff2"),
-         url(./fontsInter-Bold.woff) format("woff");
+    src: url(./fonts/Inter/Inter-Bold.woff2) format("woff2"),
+         url(./fonts/Inter/Inter-Bold.woff) format("woff");
   }
 
 @font-face {
     font-family: 'Inter';
     font-style:  normal;
-    src: url(./fontsInter-Black.woff) format('woff'),
-        url(./fontsInter-Black.woff2) format('woff2');
+    src: url(./fonts/Inter/Inter-Black.woff) format('woff'),
+        url(./fonts/Inter/Inter-Black.woff2) format('woff2');
     font-weight: 900;
 }
 
@@ -46,39 +46,42 @@
     max-width: 880px;
     margin: 0 auto;
     padding-top: 45px;
-    border: 0;
-    border-bottom: 1px solid rgba(54, 54, 54, .7);
+    position: relative;
 }
 
-/*.header::after {
+.header::after {
+    display: block;
+    width: 100%;
+    /*какую высоту выставим, такого размера и будет бордер*/
+    content: "";
+    border-bottom: 1px solid #545454;
     position: absolute;
+    opacity: .7;
+    /*а top-OM уже выставлять положение бордера*/
     bottom: 0;
     left: 0;
-    width: 100%;
-    border: 1px solid rgb(84, 84, 84);
-    opacity: .7;
-    z-index: 1;
-}*/
+}
 
 .header__logo {
     width: 142px;
     height: 33px;
-    margin: 0 auto 37px 0;
+    margin: 0;
+    padding-bottom: 41px;
+    display: block;
 }
 
 .content {
     width: 100%;
-    margin: 0 auto;
+    margin: 40px 0 67px;
     color: white;
 }
 
 .profile {
     max-width: 880px;
-    margin: 40px auto 0;
+    margin: 0 auto;
     display: grid;
-    grid-template-columns: 150px 336px 1fr;
-    grid-template-rows: auto;
-    overflow: visible;
+    grid-template-columns: 150px auto 1fr;
+    grid-template-rows: 120px;
 }
 
 .profile__avatar {
@@ -88,10 +91,14 @@
     grid-row: 1/2;
     position: relative;
     left: -22.5px;
+    top: -3.75px;
 }
 
 .profile__avatar-img {
     border-radius: 60px;
+    display: block;
+    margin-left: 22.5px;
+    margin-top: 3.75px;
 }
 
 .profile__info {
@@ -104,18 +111,21 @@
     flex-wrap: wrap;
     align-items: flex-end;
     align-content: center;
+    margin-left: 3.75px;
+
 }
 
 .profile__owner-container {
     width: 100%;
     display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
+    justify-content: left;
+    align-items: center;
     align-content: flex-end;
+    column-gap: 18px;
 }
 
 .profile__owner {
-    max-width: 294px;
+    max-width: fit-content;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 500;
@@ -133,6 +143,7 @@
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
+    line-height: 100%;
 }
 .profile__editButton-icon {
     width: 10px;
@@ -172,4 +183,53 @@
 .profile__addButton-icon {
     width: 22px;
     height: 22px;
+}
+
+.cards {
+    max-width: 880px;
+    margin: 50px auto 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
+    grid-template-rows: repeat(auto-fit, minmax(361px, 1fr));
+    row-gap: 20px;
+    column-gap: 17px;
+    
+}
+
+.card {
+    max-width: 100%;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+}
+
+.card__image {
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+    box-sizing: border-box;
+}
+
+.card__item {
+    max-width: 246px;
+    margin: 25px 15px 31px 21px;
+    display: flex;
+    justify-content: space-between;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    align-items: flex-end;
+}
+
+.card__heading {
+    margin: 0;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 29px;
+    color: #000000;
+}
+
+.card__like {
+    width: 22px;
+    height: 19px;
 }
