@@ -1,14 +1,14 @@
 @font-face {
     font-family: 'Inter';
-    font-style:  normal;
+    font-style: normal;
     font-weight: 100;
     src: url(./fonts/Inter/Inter-Thin.woff2) format("woff2"),
-         url(./fonts/Inter/Inter-Thin.woff) format("woff");
-  }
+        url(./fonts/Inter/Inter-Thin.woff) format("woff");
+}
 
 @font-face {
     font-family: 'Inter';
-    font-style:  normal;
+    font-style: normal;
     src: url(./fonts/Inter/Inter-Regular.woff) format('woff'),
         url(./fonts/Inter/Inter-Regular.woff2) format('woff2');
     font-weight: 400;
@@ -16,15 +16,15 @@
 
 @font-face {
     font-family: 'Inter';
-    font-style:  normal;
+    font-style: normal;
     font-weight: 700;
     src: url(./fonts/Inter/Inter-Bold.woff2) format("woff2"),
-         url(./fonts/Inter/Inter-Bold.woff) format("woff");
-  }
+        url(./fonts/Inter/Inter-Bold.woff) format("woff");
+}
 
 @font-face {
     font-family: 'Inter';
-    font-style:  normal;
+    font-style: normal;
     src: url(./fonts/Inter/Inter-Black.woff) format('woff'),
         url(./fonts/Inter/Inter-Black.woff2) format('woff2');
     font-weight: 900;
@@ -105,38 +105,56 @@
     grid-column: 2/3;
     grid-row: 1/2;
     width: 100%;
-    text-align: left;
+    /* text-align: left; */
     display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    align-items: flex-end;
-    align-content: center;
+    flex-direction: column;
+    justify-content: center;
+    /* flex-wrap: wrap; */
+    /* align-items: flex-end; */
+    /* align-content: center; */
     margin-left: 3.75px;
 
 }
 
-.profile__owner-container {
+/*.profile__owner-container {
     width: 100%;
     display: flex;
     justify-content: left;
     align-items: center;
     align-content: flex-end;
-    column-gap: 18px;
-}
+    column-gap: 18px; */
+
 
 .profile__owner {
-    max-width: fit-content;
+    max-width: 100%;
+    height: 39px;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 500;
     font-size: 42px;
     line-height: 114%;
     margin: 0;
-    align-self: flex-end;
+    position: relative;
 }
 
-.profile__editButton {
+.profile__owner::after {
+    content: "";
+    position: absolute;
     width: 24px;
+    height: 24px;
+    border: 1px solid white;
+    box-sizing: border-box;
+    background-position: center;
+    top: 35%;
+    right: -40px;
+    background-image: url(./images/edit-icon.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 42%;
+}
+
+/*.profile__editButton {
+    width: 24pх;
     height: 24px;
     border: 1px solid #FFFFFF;
     display: flex;
@@ -149,55 +167,61 @@
     width: 10px;
     height: 10px;    
 }
-
+*/
 .profile__owner-activity {
     max-width: 100%;
+    max-height: 18px;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
-    line-height: 22px;
-    margin-top: 25px;
-    margin: 16px 0 0 0;
+    line-height: 122%;
+    /* margin-top: 25px; */
+    margin-top: 16px;
+    margin-bottom: 0;
 }
 
-.profile__btn-container {
+.profile__addButton {
     grid-column: 3/4;
     grid-row: 1/2;
     width: 100%;
-    display: flex;
-    justify-content: right;
-    align-items: center;
+    position: relative;
 }
-.profile__addButton {
+
+.profile__addButton::after {
+    content: "";
     width: 150px;
     height: 50px;
     border: 2px solid #FFFFFF;
     border-radius: 2px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: absolute;
     box-sizing: border-box;
+    top: 30%;
+    right: 0;
+    background-image: url(./images/add-icon.svg);
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
-.profile__addButton-icon {
+/*.profile__addButton-icon {
     width: 22px;
     height: 22px;
 }
-
+*/
 .cards {
     max-width: 880px;
-    margin: 50px auto 0;
+    margin: 51px auto 0;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
     grid-template-rows: repeat(auto-fit, minmax(361px, 1fr));
     row-gap: 20px;
     column-gap: 17px;
-    
+
 }
 
 .card {
     max-width: 100%;
+    height: 100%;
     background-color: #FFFFFF;
     border-radius: 10px;
 }
@@ -206,30 +230,57 @@
     width: 100%;
     border-radius: 10px 10px 0 0;
     box-sizing: border-box;
+    display: block;
 }
 
-.card__item {
+.card__info {
     max-width: 246px;
+    max-height: 23px;
     margin: 25px 15px 31px 21px;
-    display: flex;
-    justify-content: space-between;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    align-items: flex-end;
+    position: relative;
 }
 
 .card__heading {
+    max-width: 190px;
     margin: 0;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 900;
     font-size: 24px;
-    line-height: 29px;
+    line-height: 121%;
     color: #000000;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
-.card__like {
+.card__info::after {
+    content: "";
     width: 22px;
     height: 19px;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-image: url(./images/like-icon.svg);
+    background-size: cover;
+    background-position: center;
+
+}
+
+.footer {
+    max-width: 880px;
+    margin: 0 auto;
+    padding-bottom: 60px;
+}
+
+.footer__copyright {
+    margin: 0;
+    max-width: 318px;
+    height: 18px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 121%;
+    color: #545454;
 }
