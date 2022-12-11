@@ -7,12 +7,15 @@ function showClosePopUp () {
     popUp.classList.toggle('popup_opened');
 }
 
+function likeIconActivate () {
+    like.classList.toggle('card__like-icon_active');
+}
+
 for (let i = 0; i < likeIcons.length; i++ ) {
-    likeIcons[i].addEventListener('click', function() {
+    likeIcons[i].addEventListener('click', () => {
         likeIcons[i].classList.toggle('card__like-icon_active');
     });
 }
-
 
 
 editBtn.addEventListener('click', showClosePopUp);
