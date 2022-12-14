@@ -243,13 +243,13 @@
     border-radius: 2px;
 }
 
-.popup__button:hover {
+.popup__submit-btn:hover {
     opacity: .8;
     cursor: pointer;
 }
 
 @media  screen and (max-width: 768px) {
-    .popup__button {
+    .popup__submit-btn {
         font-size: 14px;
     }
 }
