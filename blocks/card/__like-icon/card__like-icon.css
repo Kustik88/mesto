@@ -1,0 +1,13 @@
+.card__like-icon {
+    width: 22px;
+    height: 19px;
+    margin: 5px 5px 0 auto;
+    background-image: url(../../../images/like-icon.svg);
+    background-size: cover;
+    background-position: center;
+}
+
+.card__like-icon:hover {
+    opacity: .5;
+    cursor: pointer;
+}
