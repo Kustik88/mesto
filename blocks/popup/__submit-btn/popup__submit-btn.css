@@ -1,5 +1,10 @@
 .popup__submit-btn {
     width: 100%;
+    padding: 0;
+    border: none;
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
     padding: 14px 0;
     box-sizing: border-box;
     border: 0;
