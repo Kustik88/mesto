@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <meta name="description" content="Место">
+  <meta name="keywords" content="Место, Россия">
+  <meta name="author" content="Анастасия Бобренко">
+  <title>Место</title>
+  <link rel="stylesheet" href="./pages/index.css">
+</head>
+
+<body>
+  <div class="page">
+    <div class="popup">
+      <div class="popup__container">
+        <button class="popup__close-btn" type="button"></button>
+        <form class="popup__form" name="popup-form">
+          <h2 class="popup__heading">Редактировать профиль</h2>
+          <fieldset class="popup__input-container">
+            <input type="text" class="popup__owner" value="" name="owner">
+            <input type="text" class="popup__job" value="" name="job">
+          </fieldset>
+          <fieldset class="popup__handlers">
+            <button type="submit" class="popup__submit-btn">Сохранить</button>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+    <header class="header">
+      <img class="header__logo" src="./images/logo-Vector.svg" alt="Логотип Место">
+    </header>
+    <main class="content">
+      <section class="profile">
+        <img class="profile__avatar" src="./images/avatar-kusto.jpg" alt="Жак-Ив Кусто">
+        <div class="profile__info">
+          <div class="profile__owner-container">
+            <h1 class="profile__owner">Жак-Ив Кусто
+            </h1>
+            <button class="profile__edit-btn" type="button"></button>
+          </div>
+          <p class="profile__job">Исследователь океана</p>
+        </div>
+        <button class="profile__add-btn" type="button">
+        </button>
+      </section>
+      <ul class="cards">
+        <li class="card">
+          <img class="card__image" src="./images/card-karachaevsk.jpg" alt="карачаевск">
+          <div class="card__info">
+            <h2 class="card__heading">Карачаевск</h2>
+            <button class="card__like-icon" type="button"></button>
+          </div>
+        </li>
+        <li class="card">
+          <img class="card__image" src="./images/card-albrus.jpg" alt="Эльбрус">
+          <div class="card__info">
+            <h2 class="card__heading">Гора Эльбрус</h2>
+            <button class="card__like-icon" type="button"></button>
+          </div>
+        </li>
+        <li class="card">
+          <img class="card__image" src="./images/card-dombay.jpg" alt="Домбай">
+          <div class="card__info">
+            <h2 class="card__heading">Домбай</h2>
+            <button class="card__like-icon" type="button"></button>
+          </div>
+        </li>
+        <li class="card">
+          <img class="card__image" src="./images/card-teleckoe.jpg" alt="Озеро Телецкое">
+          <div class="card__info">
+            <h2 class="card__heading">Озеро Телецкое</h2>
+            <button class="card__like-icon" type="button"></button>
+          </div>
+        </li>
+        <li class="card">
+          <img class="card__image" src="./images/card-avachinsii.jpg" alt="Вулкан Авачинский">
+          <div class="card__info">
+            <h2 class="card__heading">Вулкан Авачинский</h2>
+            <button class="card__like-icon" type="button"></button>
+          </div>
+        </li>
+        <li class="card">
+          <img class="card__image" src="./images/card-arhonskii.jpg" alt="Архонский перевал">
+          <div class="card__info">
+            <h2 class="card__heading">Архонский перевал</h2>
+            <button class="card__like-icon" type="button"></button>
+          </div>
+        </li>
+      </ul>
+    </main>
+    <footer class="footer">
+      <p class="footer__copyright">© 2022 Mesto Russia</p>
+    </footer>
+  </div>
+  <script src="./scripts/script.js"></script>
+</body>
+
+</html>
