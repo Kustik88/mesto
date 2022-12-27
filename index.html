@@ -17,11 +17,11 @@
     <section class="popup popup_type_edit">
       <div class="popup__container">
         <button class="popup__close-btn" type="button"></button>
-        <form class="popup__form" name="popup-form">
+        <form class="popup__form" name="popup-form" onsubmit="return false;">
           <h2 class="popup__heading">Редактировать профиль</h2>
           <fieldset class="popup__input-container">
-            <input type="text" class="popup__owner" value="" name="owner">
-            <input type="text" class="popup__job" value="" name="job">
+            <input type="text" class="popup__input-first" value="" name="owner">
+            <input type="text" class="popup__input-second" value="" name="job">
           </fieldset>
           <fieldset class="popup__handlers">
             <button type="submit" class="popup__submit-btn">Сохранить</button>
@@ -32,11 +32,11 @@
     <section class="popup popup_type_new-card">
       <div class="popup__container">
         <button class="popup__close-btn" type="button"></button>
-        <form class="popup__form" name="popup-form">
+        <form class="popup__form" name="popup-form" onsubmit="return false;">
           <h2 class="popup__heading">Новое место</h2>
           <fieldset class="popup__input-container">
-            <input type="text" class="popup__owner" value="" name="title" placeholder="Название">
-            <input type="text" class="popup__job" value="" name="link" placeholder="Ссылка на картинку">
+            <input type="text" class="popup__input-first" value="" name="title" placeholder="Название">
+            <input type="text" class="popup__input-second" value="" name="url" placeholder="Ссылка на картинку">
           </fieldset>
           <fieldset class="popup__handlers">
             <button type="submit" class="popup__submit-btn">Создать</button>
@@ -59,8 +59,7 @@
         <img class="profile__avatar" src="./images/avatar-kusto.jpg" alt="Жак-Ив Кусто">
         <div class="profile__info">
           <div class="profile__owner-container">
-            <h1 class="profile__owner">Жак-Ив Кусто
-            </h1>
+            <h1 class="profile__owner">Жак-Ив Кусто</h1>
             <button class="profile__edit-btn" type="button"></button>
           </div>
           <p class="profile__job">Исследователь океана</p>
