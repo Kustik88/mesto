@@ -1,3 +1,15 @@
+@keyframes popup-appearance {
+  from {
+    visibility: hidden;
+    opacity: 0;
+  }
+  to {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+
 .card__delete-btn {
   width: 18px;
   height: 19px;

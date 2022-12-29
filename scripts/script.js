@@ -100,10 +100,10 @@ function handleFormSubmit (evt) {
 }
 
 function getNewCard () {
-
+  let newCard = {}
   const title = titleInput.value;
   const url = urlInput.value;
-  const newCard = [
+  newCard = [
     {
       name: title,
       link: url

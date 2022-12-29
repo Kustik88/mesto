@@ -5,7 +5,8 @@
     top: 0;
     left: 0;
     z-index: 1;
-    display: none;
+    visibility: hidden;
+    opacity: 0;
     justify-content: center;
     align-items: center;
 }
