@@ -1,15 +1,3 @@
-@keyframes popup-appearance {
-  from {
-    visibility: hidden;
-    opacity: 0;
-  }
-  to {
-    visibility: visible;
-    opacity: 1;
-  }
-}
-
-
 .card__delete-btn {
   width: 18px;
   height: 19px;
@@ -32,6 +20,10 @@
   cursor: pointer;
 }
 
+.popup_loaded {
+  transition: visibility .3s linear, opacity .3s linear;
+}
+
 .popup__figure {
   max-width: 75vw;
   margin: auto;
@@ -47,7 +39,7 @@
 }
 
 .popup__caption {
-  font-family: 'Inter';
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
