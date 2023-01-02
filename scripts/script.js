@@ -44,42 +44,12 @@ const initialCards = [
   }
 ];
 
-function getCard(elem) {
-  const newCard = cardTemplate.querySelector('.card').cloneNode(true);
-  const likeBtn = newCard.querySelector('.card__like-icon');
-  const deleteBtn = newCard.querySelector('.card__delete-btn');
-
-  newCard.querySelector('.card__image').style.backgroundImage = `url(${elem.link})`;
-  newCard.querySelector('.card__heading').textContent = `${elem.name}`;
-
-  likeBtn.addEventListener('click', () => { activateLikeIcon(likeBtn) });
-  deleteBtn.addEventListener('click', () => { deleteCard(newCard) });
-  newCard.querySelector('.card__image').addEventListener('click', () => {
-    popUpLoaded(popUpImage),
-      createPopUpImage(`${elem.name}`, `${elem.link}`),
-      togglePopUp(popUpImage);
-  });
-  return newCard;
-};
-
-
 function activateLikeIcon(iconBtn) {
   iconBtn.classList.toggle('card__like-icon_active');
 }
 
 function deleteCard(card) {
   card.remove();
-}
-
-function insertCard(array) {
-  array.forEach(item => {
-    const newCard = getCard(item);
-    if (array.length === 1) {
-      cards.prepend(newCard);
-    } else {
-      cards.append(newCard);
-    }
-  });
 }
 
 function createPopUpImage(caption, url) {
@@ -93,14 +63,43 @@ function insertProfileValuestoPopUpEdit() {
   jobInput.value = jobProfile.textContent;
 }
 
-function popUpLoaded(popUpType) {
-  if (!popUpType.classList.contains('popup_loaded')) {
-    popUpType.classList.add('popup_loaded');
+function loadPopUpTransition(popUpType) {
+  if (!popUpType.classList.contains('popup_transition_load')) {
+    popUpType.classList.add('popup_transition_load');
   };
 }
 
 function togglePopUp(popUpType) {
   popUpType.classList.toggle('popup_opened');
+}
+
+function getCard(elem) {
+  const newCard = cardTemplate.querySelector('.card').cloneNode(true);
+  const likeBtn = newCard.querySelector('.card__like-icon');
+  const deleteBtn = newCard.querySelector('.card__delete-btn');
+
+  newCard.querySelector('.card__image').style.backgroundImage = `url(${elem.link})`;
+  newCard.querySelector('.card__heading').textContent = `${elem.name}`;
+
+  likeBtn.addEventListener('click', () => { activateLikeIcon(likeBtn) });
+  deleteBtn.addEventListener('click', () => { deleteCard(newCard) });
+  newCard.querySelector('.card__image').addEventListener('click', () => {
+    loadPopUpTransition(popUpImage),
+      createPopUpImage(`${elem.name}`, `${elem.link}`),
+      togglePopUp(popUpImage);
+  });
+  return newCard;
+};
+
+function insertCard(array) {
+  array.forEach(item => {
+    const newCard = getCard(item);
+    if (array.length === 1) {
+      cards.prepend(newCard);
+    } else {
+      cards.append(newCard);
+    }
+  });
 }
 
 function handleFormSubmitPopUpEdit() {
@@ -130,7 +129,7 @@ insertCard(initialCards);
 formEditItem.addEventListener('submit', handleFormSubmitPopUpEdit);
 
 editBtn.addEventListener('click', () => {
-  popUpLoaded(popUpEdit),
+  loadPopUpTransition(popUpEdit),
     insertProfileValuestoPopUpEdit(),
     togglePopUp(popUpEdit)
 });
@@ -138,7 +137,7 @@ editBtn.addEventListener('click', () => {
 formAddItem.addEventListener('submit', () => { handleFormSubmitPopUpNewCard() });
 
 addBtn.addEventListener('click', () => {
-  popUpLoaded(popUpNewCard),
+  loadPopUpTransition(popUpNewCard),
     formAddItem.reset(),
     togglePopUp(popUpNewCard)
 });
