@@ -10,7 +10,7 @@
     opacity: 0;
     justify-content: center;
     align-items: center;
-
+    transition: visibility .3s linear, opacity .3s linear;
 }
 
 .popup::before {

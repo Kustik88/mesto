@@ -6,45 +6,19 @@ const popUpImage = document.querySelector('#image');
 const closeBtnPopUpEdit = popUpEdit.querySelector('.popup__close-btn');
 const closeBtnPopUpNewCard = popUpNewCard.querySelector('.popup__close-btn');
 const closeBtnPopUpImage = popUpImage.querySelector('.popup__close-btn');
-let formEditItem = popUpEdit.querySelector('.popup__form');
-let formAddItem = popUpNewCard.querySelector('.popup__form');
-let nameInput = formEditItem.querySelector('input[name=owner');
-let jobInput = formEditItem.querySelector('input[name=job');
-let titleInput = formAddItem.querySelector('input[name=title]');
-let urlInput = formAddItem.querySelector('input[name=url]');
+const formEditItem = popUpEdit.querySelector('.popup__form');
+const formAddItem = popUpNewCard.querySelector('.popup__form');
+const nameInput = formEditItem.querySelector('input[name=owner]');
+const jobInput = formEditItem.querySelector('input[name=job]');
+const titleInput = formAddItem.querySelector('input[name=title]');
+const urlInput = formAddItem.querySelector('input[name=url]');
 const nameProfile = document.querySelector('.profile__owner');
 const jobProfile = document.querySelector('.profile__job');
 const cardTemplate = document.querySelector('#card').content;
 const cards = document.querySelector('.cards');
+const card = cardTemplate.querySelector('.card');
 
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
-function activateLikeIcon(iconBtn) {
+function clickLikeBtn(iconBtn) {
   iconBtn.classList.toggle('card__like-icon_active');
 }
 
@@ -52,7 +26,7 @@ function deleteCard(card) {
   card.remove();
 }
 
-function createPopUpImage(caption, url) {
+function fillPopUpImage(caption, url) {
   popUpImage.querySelector('.popup__image').src = url;
   popUpImage.querySelector('.popup__image').alt = caption;
   popUpImage.querySelector('.popup__caption').textContent = caption;
@@ -63,43 +37,40 @@ function insertProfileValuestoPopUpEdit() {
   jobInput.value = jobProfile.textContent;
 }
 
-function loadPopUpTransition(popUpType) {
-  if (!popUpType.classList.contains('popup_transition_load')) {
-    popUpType.classList.add('popup_transition_load');
-  };
+function openPopUp (popUpType) {
+  popUpType.classList.add('popup_opened');
 }
 
-function togglePopUp(popUpType) {
-  popUpType.classList.toggle('popup_opened');
+function closePopUp(popUpType) {
+  popUpType.classList.remove('popup_opened');
 }
 
 function getCard(elem) {
-  const newCard = cardTemplate.querySelector('.card').cloneNode(true);
+  const newCard = card.cloneNode(true);
   const likeBtn = newCard.querySelector('.card__like-icon');
   const deleteBtn = newCard.querySelector('.card__delete-btn');
+  const imageCard = newCard.querySelector('.card__image');
 
-  newCard.querySelector('.card__image').style.backgroundImage = `url(${elem.link})`;
+  imageCard.src = elem.link;
+  imageCard.alt = elem.name;
   newCard.querySelector('.card__heading').textContent = `${elem.name}`;
 
-  likeBtn.addEventListener('click', () => { activateLikeIcon(likeBtn) });
+  likeBtn.addEventListener('click', () => { clickLikeBtn(likeBtn) });
   deleteBtn.addEventListener('click', () => { deleteCard(newCard) });
-  newCard.querySelector('.card__image').addEventListener('click', () => {
-    loadPopUpTransition(popUpImage),
-      createPopUpImage(`${elem.name}`, `${elem.link}`),
-      togglePopUp(popUpImage);
+  imageCard.addEventListener('click', () => {
+    fillPopUpImage(elem.name, elem.link),
+    openPopUp(popUpImage);
   });
   return newCard;
-};
+}
 
-function insertCard(array) {
-  array.forEach(item => {
-    const newCard = getCard(item);
-    if (array.length === 1) {
-      cards.prepend(newCard);
-    } else {
-      cards.append(newCard);
-    }
-  });
+function insertCard(card, isAppend = false) {
+  const newCard = getCard(card);
+  if (isAppend) {
+    cards.append(newCard);
+  } else {
+    cards.prepend(newCard);
+  }
 }
 
 function handleFormSubmitPopUpEdit() {
@@ -107,43 +78,38 @@ function handleFormSubmitPopUpEdit() {
   const newJob = jobInput.value;
   nameProfile.textContent = newName;
   jobProfile.textContent = newJob;
-  togglePopUp(popUpEdit)
+  closePopUp(popUpEdit)
 }
 
 function handleFormSubmitPopUpNewCard() {
-  let newCard = [];
   const title = titleInput.value;
   const url = urlInput.value;
-  newCard = [
-    {
-      name: title,
-      link: url
-    }
-  ];
-  togglePopUp(popUpNewCard);
+  const newCard = {
+    name: title,
+    link: url
+  };
+  closePopUp(popUpNewCard);
   insertCard(newCard);
 }
 
-insertCard(initialCards);
+initialCards.forEach(item => {
+  insertCard(item, true);
+})
 
 formEditItem.addEventListener('submit', handleFormSubmitPopUpEdit);
 
 editBtn.addEventListener('click', () => {
-  loadPopUpTransition(popUpEdit),
-    insertProfileValuestoPopUpEdit(),
-    togglePopUp(popUpEdit)
+  insertProfileValuestoPopUpEdit(),
+  openPopUp(popUpEdit)
 });
 
-formAddItem.addEventListener('submit', () => { handleFormSubmitPopUpNewCard() });
+formAddItem.addEventListener('submit', handleFormSubmitPopUpNewCard);
 
 addBtn.addEventListener('click', () => {
-  loadPopUpTransition(popUpNewCard),
-    formAddItem.reset(),
-    togglePopUp(popUpNewCard)
+  formAddItem.reset(),
+  openPopUp(popUpNewCard)
 });
 
-closeBtnPopUpEdit.addEventListener('click', () => { togglePopUp(popUpEdit) });
-closeBtnPopUpNewCard.addEventListener('click', () => { togglePopUp(popUpNewCard) });
-closeBtnPopUpImage.addEventListener('click', () => { togglePopUp(popUpImage) });
-
-
+closeBtnPopUpEdit.addEventListener('click', () => { closePopUp(popUpEdit) });
+closeBtnPopUpNewCard.addEventListener('click', () => { closePopUp(popUpNewCard) });
+closeBtnPopUpImage.addEventListener('click', () => { closePopUp(popUpImage) });
