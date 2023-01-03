@@ -9,18 +9,20 @@
   <meta name="author" content="Анастасия Бобренко">
   <title>Место</title>
   <link rel="stylesheet" href="./pages/index.css">
+  <script defer src="./scripts/constants.js"></script>
+  <script defer src="./scripts/script.js"></script>
 </head>
 
 <body>
   <div class="page">
     <section class="popup" id="editProfile">
       <div class="popup__container">
-        <button class="popup__close-btn" type="button"></button>
+        <button class="popup__close-btn" aria-label="Закрыть" type="button"></button>
         <form class="popup__form" name="popup-form" onsubmit="return false;">
           <h2 class="popup__heading">Редактировать профиль</h2>
           <fieldset class="popup__input-container">
-            <input type="text" class="popup__input-first" value="" name="owner">
-            <input type="text" class="popup__input-second" value="" name="job">
+            <input type="text" class="popup__input-first" name="owner" placeholder="Имя" required>
+            <input type="text" class="popup__input-second" name="job" placeholder="О себе" required>
           </fieldset>
           <fieldset class="popup__handlers">
             <button type="submit" class="popup__submit-btn">Сохранить</button>
@@ -34,8 +36,8 @@
         <form class="popup__form" name="popup-form" onsubmit="return false;">
           <h2 class="popup__heading">Новое место</h2>
           <fieldset class="popup__input-container">
-            <input type="text" class="popup__input-first" value="" name="title" placeholder="Название">
-            <input type="text" class="popup__input-second" value="" name="url" placeholder="Ссылка на картинку">
+            <input type="text" class="popup__input-first" name="title" placeholder="Название" required>
+            <input type="url" class="popup__input-second" name="url" placeholder="Ссылка на картинку" required>
           </fieldset>
           <fieldset class="popup__handlers">
             <button type="submit" class="popup__submit-btn">Создать</button>
@@ -43,7 +45,7 @@
         </form>
       </div>
     </section>
-    <section class="popup" id="image">
+    <section class="popup popup_background-blackout_hard" id="image">
       <figure class="popup__figure">
         <button class="popup__close-btn" type="button"></button>
         <img class="popup__image" src="#" alt="картинка">
@@ -59,11 +61,11 @@
         <div class="profile__info">
           <div class="profile__owner-container">
             <h1 class="profile__owner">Жак-Ив Кусто</h1>
-            <button class="profile__edit-btn" type="button"></button>
+            <button class="profile__edit-btn" aria-label="Изменить профиль" type="button"></button>
           </div>
           <p class="profile__job">Исследователь океана</p>
         </div>
-        <button class="profile__add-btn" type="button">
+        <button class="profile__add-btn" aria-label="Добавить место" type="button">
         </button>
       </section>
       <ul class="cards">
@@ -75,15 +77,15 @@
   </div>
   <template id="card">
     <li class="card">
-      <button class="card__delete-btn" type="button"></button>
-      <div class="card__image"></div>
+      <button class="card__delete-btn" aria-label="Удалить" type="button"></button>
+      <img class="card__image" src="#" alt="изображение">
       <div class="card__info">
         <h2 class="card__heading"></h2>
-        <button class="card__like-icon" type="button"></button>
+        <button class="card__like-icon" aria-label="Нравится" type="button"></button>
       </div>
     </li>
   </template>
-  <script src="./scripts/script.js"></script>
+
 </body>
 
 </html>
