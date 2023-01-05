@@ -37,12 +37,12 @@ function insertProfileValuestoPopUpEdit() {
   jobInput.value = jobProfile.textContent;
 }
 
-function openPopUp (popUpType) {
-  popUpType.classList.add('popup_opened');
+function openPopUp (popUp) {
+  popUp.classList.add('popup_opened');
 }
 
-function closePopUp(popUpType) {
-  popUpType.classList.remove('popup_opened');
+function closePopUp(popUp) {
+  popUp.classList.remove('popup_opened');
 }
 
 function getCard(elem) {
