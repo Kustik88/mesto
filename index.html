@@ -21,8 +21,8 @@
         <form class="popup__form" name="popup-form" onsubmit="return false;">
           <h2 class="popup__heading">Редактировать профиль</h2>
           <fieldset class="popup__input-container">
-            <input type="text" class="popup__input-first" name="owner" placeholder="Имя" required>
-            <input type="text" class="popup__input-second" name="job" placeholder="О себе" required>
+            <input type="text" class="popup__input-first" name="owner" placeholder="Имя" minlength="2" maxlength="40" required>
+            <input type="text" class="popup__input-second" name="job" placeholder="О себе" minlength="2" maxlength="200" required>
           </fieldset>
           <fieldset class="popup__handlers">
             <button type="submit" class="popup__submit-btn">Сохранить</button>
@@ -36,7 +36,7 @@
         <form class="popup__form" name="popup-form" onsubmit="return false;">
           <h2 class="popup__heading">Новое место</h2>
           <fieldset class="popup__input-container">
-            <input type="text" class="popup__input-first" name="title" placeholder="Название" required>
+            <input type="text" class="popup__input-first" name="title" placeholder="Название" minlength="2" maxlength="30" required>
             <input type="url" class="popup__input-second" name="url" placeholder="Ссылка на картинку" required>
           </fieldset>
           <fieldset class="popup__handlers">
