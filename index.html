@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="./pages/index.css">
   <script defer src="./scripts/constants.js"></script>
   <script defer src="./scripts/index.js"></script>
+  <script defer src="./scripts/validate.js"></script>
 </head>
 
 <body>
@@ -18,11 +19,17 @@
     <section class="popup" id="editProfile">
       <div class="popup__container">
         <button class="popup__close-btn" aria-label="Закрыть" type="button"></button>
-        <form class="popup__form" name="popup-form" onsubmit="return false;">
+        <form class="popup__form" name="popup-form" onsubmit="return false;" novalidate>
           <h2 class="popup__heading">Редактировать профиль</h2>
           <fieldset class="popup__input-container">
-            <input type="text" class="popup__input-first" name="owner" placeholder="Имя" minlength="2" maxlength="40" required>
-            <input type="text" class="popup__input-second" name="job" placeholder="О себе" minlength="2" maxlength="200" required>
+            <div class="popup__input-field">
+              <input type="text" class="popup__input" name="owner" id="owner-input" placeholder="Имя" minlength="2" maxlength="40" required>
+              <span class="popup__input-error popup__input-error_type_owner">1111</span>
+            </div>
+            <div class="popup__input-field">
+              <input type="text" class="popup__input" name="job" id="job-input" placeholder="О себе" minlength="2" maxlength="200" required>
+              <span class="popup__input-error popup__input-error_type_job">11111</span>
+            </div>
           </fieldset>
           <fieldset class="popup__handlers">
             <button type="submit" class="popup__submit-btn">Сохранить</button>
@@ -33,12 +40,18 @@
     <section class="popup" id="addCard">
       <div class="popup__container">
         <button class="popup__close-btn" type="button"></button>
-        <form class="popup__form" name="popup-form" onsubmit="return false;">
+        <form class="popup__form" name="popup-form" onsubmit="return false;" novalidate>
           <h2 class="popup__heading">Новое место</h2>
           <fieldset class="popup__input-container">
-            <input type="text" class="popup__input-first" name="title" placeholder="Название" minlength="2" maxlength="30" required>
-            <input type="url" class="popup__input-second" name="url" placeholder="Ссылка на картинку" required>
-          </fieldset>
+            <div class="popup__input-field">
+              <input type="text" class="popup__input" name="title" id="title-input"  placeholder="Название" minlength="2" maxlength="30" required>
+              <span class="popup__input-error popup__input-error_type_title">111</span>
+            </div>
+            <div class="popup__input-field">
+              <input type="url" class="popup__input" name="url" id="url-input" placeholder="Ссылка на картинку" required>
+              <span class="popup__input-error popup__input-error_type_url">1111</span>
+            </div>
+            </fieldset>
           <fieldset class="popup__handlers">
             <button type="submit" class="popup__submit-btn">Создать</button>
           </fieldset>
