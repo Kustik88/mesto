@@ -3,9 +3,6 @@ const addBtn = document.querySelector('.profile__add-btn');
 const popUpEdit = document.querySelector('#editProfile');
 const popUpNewCard = document.querySelector('#addCard');
 const popUpImage = document.querySelector('#image');
-const closeBtnPopUpEdit = popUpEdit.querySelector('.popup__close-btn');
-const closeBtnPopUpNewCard = popUpNewCard.querySelector('.popup__close-btn');
-const closeBtnPopUpImage = popUpImage.querySelector('.popup__close-btn');
 const formEditItem = popUpEdit.querySelector('.popup__form');
 const formAddItem = popUpNewCard.querySelector('.popup__form');
 const nameInput = formEditItem.querySelector('input[name=owner]');
@@ -32,7 +29,7 @@ function fillPopUpImage(caption, url) {
   popUpImage.querySelector('.popup__caption').textContent = caption;
 }
 
-function insertProfileValuestoPopUpEdit() {
+function insertProfileValuesToPopUpEdit() {
   nameInput.value = nameProfile.textContent;
   jobInput.value = jobProfile.textContent;
 }
@@ -92,14 +89,32 @@ function handleFormSubmitPopUpNewCard() {
   insertCard(newCard);
 }
 
+function resetInputError(popUp) {
+  const errorInputlist = Array.from(popUp.querySelectorAll('.popup__input'));
+  const errorList = Array.from(popUp.querySelectorAll('.popup__input-error'));
+  errorInputlist.forEach((errorInputElement) => {
+    errorInputElement.classList.remove('popup__input_type_error');
+  });
+  errorList.forEach((errorElement) => {
+    errorElement.classList.remove('popup__input-error_visible');
+    errorElement.textContent = '';
+  });
+};
+
+function checkPopUpArea(evt) {
+  return (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-btn') )
+}
+
 initialCards.forEach(item => {
   insertCard(item, true);
 })
 
+enableValidation(validationClasses);
+
 formEditItem.addEventListener('submit', handleFormSubmitPopUpEdit);
 
 editBtn.addEventListener('click', () => {
-  insertProfileValuestoPopUpEdit(),
+  insertProfileValuesToPopUpEdit(),
   openPopUp(popUpEdit)
 });
 
@@ -110,6 +125,20 @@ addBtn.addEventListener('click', () => {
   openPopUp(popUpNewCard)
 });
 
-closeBtnPopUpEdit.addEventListener('click', () => { closePopUp(popUpEdit) });
-closeBtnPopUpNewCard.addEventListener('click', () => { closePopUp(popUpNewCard) });
-closeBtnPopUpImage.addEventListener('click', () => { closePopUp(popUpImage) });
+popUpEdit.addEventListener('click', (evt) => {
+  if (checkPopUpArea(evt)) {
+    closePopUp(popUpEdit), resetInputError(popUpEdit)
+  };
+});
+
+popUpNewCard.addEventListener('click', (evt) => {
+  if (checkPopUpArea(evt)) {
+    closePopUp(popUpNewCard), resetInputError(popUpNewCard)
+  };
+});
+
+popUpImage.addEventListener('click', (evt) => {
+  if (checkPopUpArea(evt)) {
+    closePopUp(popUpImage)
+  };
+});
