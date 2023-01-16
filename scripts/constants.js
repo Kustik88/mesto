@@ -25,7 +25,7 @@ const initialCards = [
   }
 ];
 
-const validationClasses = {
+const validationSettings = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__submit-btn',

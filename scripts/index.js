@@ -34,12 +34,33 @@ function insertProfileValuesToPopUpEdit() {
   jobInput.value = jobProfile.textContent;
 }
 
-function openPopUp (popUp) {
+function defineOpenPopUp() {
+  const activePopUp = document.querySelector('.popup_opened');
+  return activePopUp;
+}
+
+function handleEscUp(evt) {
+  evt.preventDefault();
+  const activePopUp = defineOpenPopUp();
+  if (evt.key === 'Escape') {
+    closePopUp(activePopUp);
+  }
+}
+
+function openPopUp(popUp) {
+  document.addEventListener('keyup', handleEscUp);
   popUp.classList.add('popup_opened');
 }
 
 function closePopUp(popUp) {
+  if (popUp.id === 'editProfile') {
+    popUp.removeEventListener('submit', handleFormSubmitPopUpEdit);
+  } else {
+    popUp.removeEventListener('submit', handleFormSubmitPopUpNewCard);
+  }
+  document.removeEventListener('keyup', handleEscUp);
   popUp.classList.remove('popup_opened');
+  resetInputError(popUp);
 }
 
 function getCard(elem) {
@@ -56,7 +77,7 @@ function getCard(elem) {
   deleteBtn.addEventListener('click', () => { deleteCard(newCard) });
   imageCard.addEventListener('click', () => {
     fillPopUpImage(elem.name, elem.link),
-    openPopUp(popUpImage);
+      openPopUp(popUpImage);
   });
   return newCard;
 }
@@ -90,55 +111,58 @@ function handleFormSubmitPopUpNewCard() {
 }
 
 function resetInputError(popUp) {
-  const errorInputlist = Array.from(popUp.querySelectorAll('.popup__input'));
+  const inputlist = Array.from(popUp.querySelectorAll(validationSettings.inputSelector));
   const errorList = Array.from(popUp.querySelectorAll('.popup__input-error'));
-  errorInputlist.forEach((errorInputElement) => {
-    errorInputElement.classList.remove('popup__input_type_error');
-  });
-  errorList.forEach((errorElement) => {
-    errorElement.classList.remove('popup__input-error_visible');
-    errorElement.textContent = '';
-  });
-};
+  inputlist.forEach((inputElement, index) => {
+    if (inputElement.classList.contains(validationSettings.inputErrorClass)) {
+      inputElement.classList.remove(validationSettings.inputErrorClass);
+      errorList[index].classList.remove(validationSettings.errorClass);
+    }
+  })
+}
 
-function checkPopUpArea(evt) {
-  return (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-btn') )
+function checkCloseArea(evt) {
+  return (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-btn'))
 }
 
 initialCards.forEach(item => {
   insertCard(item, true);
 })
 
-enableValidation(validationClasses);
+enableValidation(validationSettings);
 
-formEditItem.addEventListener('submit', handleFormSubmitPopUpEdit);
+
 
 editBtn.addEventListener('click', () => {
-  insertProfileValuesToPopUpEdit(),
+  formEditItem.addEventListener('submit', handleFormSubmitPopUpEdit);
+  insertProfileValuesToPopUpEdit();
+  const formElements = defineFormElements(popUpEdit, validationSettings.inputSelector, validationSettings.submitButtonSelector);
+  toggleButtonState(formElements.inputList, formElements.buttonElement, validationSettings.inactiveButtonClass);
   openPopUp(popUpEdit)
-});
-
-formAddItem.addEventListener('submit', handleFormSubmitPopUpNewCard);
+})
 
 addBtn.addEventListener('click', () => {
-  formAddItem.reset(),
+  formAddItem.addEventListener('submit', handleFormSubmitPopUpNewCard);
+  formAddItem.reset();
+  const formElements = defineFormElements(popUpNewCard, validationSettings.inputSelector, validationSettings.submitButtonSelector);
+  toggleButtonState(formElements.inputList, formElements.buttonElement, validationSettings.inactiveButtonClass);
   openPopUp(popUpNewCard)
-});
+})
 
 popUpEdit.addEventListener('click', (evt) => {
-  if (checkPopUpArea(evt)) {
-    closePopUp(popUpEdit), resetInputError(popUpEdit)
+  if (checkCloseArea(evt)) {
+    closePopUp(popUpEdit);
   };
-});
+})
 
 popUpNewCard.addEventListener('click', (evt) => {
-  if (checkPopUpArea(evt)) {
-    closePopUp(popUpNewCard), resetInputError(popUpNewCard)
+  if (checkCloseArea(evt)) {
+    closePopUp(popUpNewCard);
   };
-});
+})
 
 popUpImage.addEventListener('click', (evt) => {
-  if (checkPopUpArea(evt)) {
+  if (checkCloseArea(evt)) {
     closePopUp(popUpImage)
   };
-});
+})
