@@ -11,7 +11,6 @@ const hideInputError = (popUpForm, inputElement, { inputErrorClass, errorClass }
   errorElement.classList.remove(errorClass);
   errorElement.textContent = '';
 }
-
 const checkInputValidity = (popUpForm, inputElement, errorClasses) => {
   if (!inputElement.validity.valid) {
     showInputError(popUpForm, inputElement, inputElement.validationMessage, errorClasses);
@@ -61,3 +60,13 @@ const toggleButtonState = ((inputList, buttonElement, inactiveButtonClass) => {
     buttonElement.classList.remove(inactiveButtonClass);
   }
 })
+
+function resetInputError(popUpForm) {
+  const formElements = defineFormElements(popUpForm, validationSettings.inputSelector, validationSettings.submitButtonSelector);
+  formElements.inputList.forEach((inputElement) => {
+    hideInputError(popUpForm, inputElement, validationSettings);
+  });
+  toggleButtonState(formElements.inputList, formElements.buttonElement, validationSettings.inactiveButtonClass);
+}
+
+enableValidation(validationSettings);
