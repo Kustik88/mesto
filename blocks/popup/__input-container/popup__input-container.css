@@ -2,7 +2,7 @@
     margin: 44px auto 0;
     max-width: 358px;
     text-align: left;
-    row-gap: 30px;
+    /*row-gap: 30px;*/
     display: flex;
     flex-direction: column;
     justify-content: space-between;
