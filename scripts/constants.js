@@ -23,7 +23,7 @@ const initialCards = [
     name: 'Байкал',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
-];
+]
 
 const validationSettings = {
   formSelector: '.popup__form',
@@ -32,4 +32,4 @@ const validationSettings = {
   inactiveButtonClass: 'popup__submit-btn_inactive',
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__input-error_visible'
-};
+}
