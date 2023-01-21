@@ -1,8 +1,8 @@
 .popup__submit-btn {
     width: 100%;
-    border: none;
+    border: 1px solid #000000;
     font: inherit;
-    padding: 14px 0;
+    padding: 13px 0;
     box-sizing: border-box;
     background-color: #000000;
     color: white;

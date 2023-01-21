@@ -69,4 +69,11 @@ const enableSubmitBtn = ((buttonElement, inactiveButtonClass) => {
   buttonElement.classList.remove(inactiveButtonClass);
 })
 
+const resetInputError = ((popUpForm, errorClasses) => {
+  inputList = Array.from(popUpForm.querySelectorAll(validationSettings.inputSelector));
+  inputList.forEach(inputElement => {
+    hideInputError(popUpForm, inputElement, errorClasses);
+});
+})
+
 enableValidation(validationSettings);

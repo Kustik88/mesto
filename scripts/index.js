@@ -19,7 +19,6 @@ const cardTemplate = document.querySelector('#card').content;
 const cards = document.querySelector('.cards');
 const card = cardTemplate.querySelector('.card');
 
-
 function openPopUp(popUp) {
   document.addEventListener('keyup', handleEscUp);
   popUp.classList.add('popup_opened');
@@ -27,8 +26,8 @@ function openPopUp(popUp) {
 
 function handleEscUp(evt) {
   evt.preventDefault();
-  const popUpActive = document.querySelector('.popup_opened');
   if (evt.key === 'Escape') {
+    const popUpActive = document.querySelector('.popup_opened');
     closePopUp(popUpActive);
   }
 }
@@ -42,7 +41,7 @@ function checkCloseArea(evt) {
   return (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-btn'))
 }
 
-function clickbtnLike(iconBtn) {
+function clickBtnLike(iconBtn) {
   iconBtn.classList.toggle('card__like-icon_active');
 }
 
@@ -71,7 +70,7 @@ function getCard(elem) {
   imageCard.alt = elem.name;
   cardAdd.querySelector('.card__heading').textContent = `${elem.name}`;
 
-  btnLike.addEventListener('click', () => { clickbtnLike(btnLike) });
+  btnLike.addEventListener('click', () => { clickBtnLike(btnLike) });
   btnDelete.addEventListener('click', () => { deleteCard(cardAdd) });
   imageCard.addEventListener('click', () => {
     fillPopUpImage(elem.name, elem.link);
@@ -90,19 +89,15 @@ function insertCard(card, isAppend = false) {
 }
 
 function handleFormSubmitPopUpEdit() {
-  const newName = nameInput.value;
-  const newJob = jobInput.value;
-  nameProfile.textContent = newName;
-  jobProfile.textContent = newJob;
+  nameProfile.textContent = nameInput.value;
+  jobProfile.textContent = jobInput.value;
   closePopUp(popUpEdit)
 }
 
 function handleFormSubmitPopUpcardAdd() {
-  const title = titleInput.value;
-  const url = urlInput.value;
   const cardAdd = {
-    name: title,
-    link: url
+    name: titleInput.value,
+    link: urlInput.value
   };
   closePopUp(popUpCardAdd);
   insertCard(cardAdd);
@@ -114,16 +109,14 @@ initialCards.forEach(item => {
 
 btnEditProfile.addEventListener('click', () => {
   insertProfileValuesToPopUpEdit();
-  hideInputError(formEdit, nameInput, validationSettings);
-  hideInputError(formEdit, jobInput, validationSettings);
+  resetInputError(formEdit, validationSettings);
   enableSubmitBtn(btnSubmitFormEdit, validationSettings.inactiveButtonClass);
   openPopUp(popUpEdit)
 })
 
 btnAddCard.addEventListener('click', () => {
   formAdd.reset();
-  hideInputError(formAdd, titleInput, validationSettings);
-  hideInputError(formAdd, urlInput, validationSettings);
+  resetInputError(formAdd, validationSettings);
   disableSubmitBtn(btnSubmitFormAdd, validationSettings.inactiveButtonClass);
   openPopUp(popUpCardAdd)
 })
