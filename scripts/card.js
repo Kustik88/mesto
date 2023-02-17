@@ -16,9 +16,9 @@ class Card {
       .querySelector(this._templateSelector)
       .content
       .querySelector('.card')
-      .cloneNode(true);
+      .cloneNode(true)
 
-    return cardElement;
+    return cardElement
   }
 
   getCard() {
@@ -57,4 +57,4 @@ class Card {
   }
 }
 
-export {popUpImage, Card}
+export { popUpImage, Card }
