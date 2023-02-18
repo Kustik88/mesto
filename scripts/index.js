@@ -1,13 +1,17 @@
 import formValidator from "./formValidator.js"
-import { Card, popUpImage } from "./card.js"
+import Card from "./card.js"
 import { initialCards, validationSettings } from "./constants.js"
 
+const popups = document.querySelectorAll('.popup')
 const btnEditProfile = document.querySelector('.profile__edit-btn')
 const btnAddCard = document.querySelector('.profile__add-btn')
 const popUpEdit = document.querySelector('.popup_type_profile-edit')
 const popUpCardAdd = document.querySelector('.popup_type_add-card')
 const formEdit = popUpEdit.querySelector('.popup__form')
 const formAdd = popUpCardAdd.querySelector('.popup__form')
+const popUpImage = document.querySelector('.popup_type_image')
+const imagePopUp = popUpImage.querySelector('.popup__image')
+const captionPopUp = popUpImage.querySelector('.popup__caption')
 const nameInput = formEdit.querySelector('input[name=owner]')
 const jobInput = formEdit.querySelector('input[name=job]')
 const titleInput = formAdd.querySelector('input[name=title]')
@@ -19,7 +23,7 @@ const formEditValidator = new formValidator(validationSettings, formEdit)
 const formAddValidator = new formValidator(validationSettings, formAdd)
 
 
-export function openPopUp(popUp) {
+function openPopUp(popUp) {
   document.addEventListener('keyup', handleEscUp)
   popUp.classList.add('popup_opened')
 }
@@ -33,7 +37,7 @@ function handleEscUp(evt) {
 }
 
 function closePopUp(popUp) {
-  document.removeEventListener('keyup', handleEscUp);
+  document.removeEventListener('keyup', handleEscUp)
   popUp.classList.remove('popup_opened')
 }
 
@@ -46,12 +50,24 @@ function insertProfileValuesToPopUpEdit() {
   jobInput.value = jobProfile.textContent
 }
 
+function handleCardClick(name, link) {
+  imagePopUp.alt = name
+  imagePopUp.src = link
+  captionPopUp.textContent = name
+  openPopUp(popUpImage)
+}
+
+function createCard(dataCard) {
+  const card = new Card(dataCard, '#card', handleCardClick)
+  const cardElement = card.getCard()
+  return cardElement
+}
+
 function insertCard(card, isAppend = false) {
-  const cardAdd = card.getCard()
   if (isAppend) {
-    cards.append(cardAdd)
+    cards.append(card)
   } else {
-    cards.prepend(cardAdd)
+    cards.prepend(card)
   }
 }
 
@@ -61,18 +77,18 @@ function handleFormSubmitPopUpEdit() {
   closePopUp(popUpEdit)
 }
 
-function handleFormSubmitPopUpcardAdd() {
+function handleFormSubmitPopUpCardAdd() {
   const dataCard = {
     name: titleInput.value,
     link: urlInput.value
   }
-  const cardAdd = new Card(dataCard, '#card')
+  const cardAdd = createCard(dataCard)
   closePopUp(popUpCardAdd)
   insertCard(cardAdd)
 }
 
-initialCards.forEach(item => {
-  const cardAdd = new Card(item, '#card')
+initialCards.forEach(dataCard => {
+  const cardAdd = createCard(dataCard)
   insertCard(cardAdd, true)
 })
 
@@ -92,24 +108,14 @@ btnAddCard.addEventListener('click', () => {
 
 formEdit.addEventListener('submit', handleFormSubmitPopUpEdit)
 
-formAdd.addEventListener('submit', handleFormSubmitPopUpcardAdd)
+formAdd.addEventListener('submit', handleFormSubmitPopUpCardAdd)
 
-popUpEdit.addEventListener('click', (evt) => {
-  if (checkCloseArea(evt)) {
-    closePopUp(popUpEdit)
-  }
-})
-
-popUpCardAdd.addEventListener('click', (evt) => {
-  if (checkCloseArea(evt)) {
-    closePopUp(popUpCardAdd)
-  }
-})
-
-popUpImage.addEventListener('click', (evt) => {
-  if (checkCloseArea(evt)) {
-    closePopUp(popUpImage)
-  }
+popups.forEach(popup => {
+  popup.addEventListener('click', (evt) => {
+    if (checkCloseArea(evt)) {
+      closePopUp(popup)
+    }
+  })
 })
 
 formAddValidator.enableValidation()
