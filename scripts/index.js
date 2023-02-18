@@ -1,4 +1,4 @@
-import formValidator from "./formValidator.js"
+import FormValidator from "./FormValidator.js"
 import Card from "./card.js"
 import { initialCards, validationSettings } from "./constants.js"
 
@@ -19,8 +19,8 @@ const urlInput = formAdd.querySelector('input[name=url]')
 const nameProfile = document.querySelector('.profile__owner')
 const jobProfile = document.querySelector('.profile__job')
 const cards = document.querySelector('.cards')
-const formEditValidator = new formValidator(validationSettings, formEdit)
-const formAddValidator = new formValidator(validationSettings, formAdd)
+const formEditValidator = new FormValidator(validationSettings, formEdit)
+const formAddValidator = new FormValidator(validationSettings, formAdd)
 
 
 function openPopUp(popUp) {
