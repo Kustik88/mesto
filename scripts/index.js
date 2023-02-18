@@ -22,7 +22,6 @@ const cards = document.querySelector('.cards')
 const formEditValidator = new FormValidator(validationSettings, formEdit)
 const formAddValidator = new FormValidator(validationSettings, formAdd)
 
-
 function openPopUp(popUp) {
   document.addEventListener('keyup', handleEscUp)
   popUp.classList.add('popup_opened')
