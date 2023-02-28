@@ -1,6 +1,6 @@
-import FormValidator from "./formValidator.js"
-import Card from "./card.js"
-import { initialCards, validationSettings } from "./constants.js"
+import FormValidator from "../scripts/formValidator.js"
+import Card from "../scripts/Card.js"
+import { initialCards, validationSettings } from "../scripts/constants.js"
 
 const popups = document.querySelectorAll('.popup')
 const btnEditProfile = document.querySelector('.profile__edit-btn')
