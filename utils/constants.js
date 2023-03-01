@@ -1,4 +1,4 @@
-const initialCards = [
+export const initialCards = [
   {
     name: 'Архыз',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
@@ -25,7 +25,7 @@ const initialCards = [
   }
 ]
 
-const validationSettings = {
+export const validationSettings = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__submit-btn',
@@ -33,5 +33,10 @@ const validationSettings = {
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__input-error_visible'
 }
-
-export { initialCards, validationSettings }
+const popUpImage = document.querySelector('.popup_type_image')
+export const btnEditProfile = document.querySelector('.profile__edit-btn')
+export const btnAddCard = document.querySelector('.profile__add-btn')
+const popUpEdit = document.querySelector('.popup_type_profile-edit')
+const popUpCardAdd = document.querySelector('.popup_type_add-card')
+export const formEdit = popUpEdit.querySelector('.popup__form')
+export const formAdd = popUpCardAdd.querySelector('.popup__form')

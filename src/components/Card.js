@@ -1,5 +1,5 @@
 export default class Card {
-  constructor(data, templateSelector, handleCardClick) {
+  constructor(data, templateSelector, { handleCardClick }) {
     this._name = data.name
     this._link = data.link
     this._templateSelector = templateSelector
@@ -23,7 +23,7 @@ export default class Card {
     this._imageCard = this._cardElement.querySelector('.card__image')
     this._imageCard.src = this._link
     this._imageCard.alt = this._name
-    this._cardElement.querySelector('.card__heading').textContent = `${this._name}`;
+    this._cardElement.querySelector('.card__heading').textContent = this._name
     this._setEventListeners()
     return this._cardElement
   }
