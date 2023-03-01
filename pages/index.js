@@ -59,10 +59,9 @@ const cardList = new Section({
 
 btnEditProfile.addEventListener('click', () => {
   const dataProfile = userProfile.getUserInfo()
-  popupEdit.insertProfileValuesToForm(dataProfile)
   formEditValidator.resetErrors()
   formEditValidator.enableSubmitButton()
-  popupEdit.open()
+  popupEdit.open(dataProfile)
 })
 
 btnAddCard.addEventListener('click', () => {

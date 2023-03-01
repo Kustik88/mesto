@@ -13,7 +13,7 @@ export default class PopupWithForm extends Popup {
     this._inputList.forEach(inputItem => this._inputValues[inputItem.name] = inputItem.value)
   }
 
-  insertProfileValuesToForm(data) {
+  _insertProfileValuesToForm(data) {
     Object.keys(data).forEach(key => {
       this._inputList.forEach(inputItem => {
         if (key === inputItem.name) {
@@ -31,6 +31,10 @@ export default class PopupWithForm extends Popup {
     })
   }
 
+  open(data) {
+    this._insertProfileValuesToForm(data)
+    super.open()
+  }
   close() {
     super.close()
     this._popupForm.reset()
