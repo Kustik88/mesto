@@ -1,9 +1,9 @@
-import FormValidator from "../src/components/FormValidator.js"
-import Card from "../src/components/Card.js"
-import PopupWithForm from "../src/components/PopupWithForm.js"
-import PopupWithImage from "../src/components/PopupWithImage.js"
-import Section from "../src/components/Section.js"
-import UserInfo from "../src/components/UserInfo.js"
+import FormValidator from "../components/FormValidator.js"
+import Card from "../components/Card.js"
+import PopupWithForm from "../components/PopupWithForm.js"
+import PopupWithImage from "../components/PopupWithImage.js"
+import Section from "../components/Section.js"
+import UserInfo from "../components/UserInfo.js"
 import {
   initialCards,
   validationSettings,
@@ -43,12 +43,12 @@ const popupEdit = new PopupWithForm({
 }, '.popup_type_profile-edit')
 
 const popupImage = new PopupWithImage('.popup_type_image')
+
 const cardList = new Section({
   items: initialCards,
   renderer: dataCard => {
     const card = new Card(dataCard, '#card', {
       handleCardClick: () => {
-        popupImage.setEventListeners()
         popupImage.open(dataCard)
       }
     })
@@ -59,9 +59,10 @@ const cardList = new Section({
 
 btnEditProfile.addEventListener('click', () => {
   const dataProfile = userProfile.getUserInfo()
+  popupEdit.insertProfileValuesToForm(dataProfile)
   formEditValidator.resetErrors()
   formEditValidator.enableSubmitButton()
-  popupEdit.open(dataProfile)
+  popupEdit.open()
 })
 
 btnAddCard.addEventListener('click', () => {
