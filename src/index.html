@@ -17,17 +17,15 @@
         <button class="popup__close-btn" aria-label="Закрыть" type="button"></button>
         <form class="popup__form" name="popup-form" novalidate>
           <h2 class="popup__heading">Редактировать профиль</h2>
-          <fieldset class="popup__input-container">
+          <div class="popup__input-container">
             <input type="text" class="popup__input" name="owner" id="owner-input" placeholder="Имя" minlength="2"
               maxlength="40" required>
             <span class="popup__input-error" id="owner-input-error"></span>
             <input type="text" class="popup__input" name="job" id="job-input" placeholder="О себе" minlength="2"
               maxlength="200" required>
             <span class="popup__input-error" id="job-input-error"></span>
-          </fieldset>
-          <fieldset class="popup__handlers">
-            <button type="submit" class="popup__submit-btn">Сохранить</button>
-          </fieldset>
+          </div>
+          <button type="submit" class="popup__submit-btn">Сохранить</button>
         </form>
       </div>
     </section>
@@ -36,17 +34,15 @@
         <button class="popup__close-btn" aria-label="Закрыть" type="button"></button>
         <form class="popup__form" name="popup-form" novalidate>
           <h2 class="popup__heading">Новое место</h2>
-          <fieldset class="popup__input-container">
+          <div class="popup__input-container">
             <input type="text" class="popup__input" name="name" id="title-input" placeholder="Название" minlength="2"
               maxlength="30" required>
             <span class="popup__input-error" id="title-input-error"></span>
             <input type="url" class="popup__input" name="link" id="url-input" placeholder="Ссылка на картинку"
               required>
             <span class="popup__input-error" id="url-input-error"></span>
-          </fieldset>
-          <fieldset class="popup__handlers">
-            <button type="submit" class="popup__submit-btn">Создать</button>
-          </fieldset>
+          </div>
+          <button type="submit" class="popup__submit-btn">Создать</button>
         </form>
       </div>
     </section>
