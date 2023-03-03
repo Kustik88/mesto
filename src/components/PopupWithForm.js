@@ -11,23 +11,14 @@ export default class PopupWithForm extends Popup {
   _getInputValues() {
     this._inputValues = {}
     this._inputList.forEach(inputItem => this._inputValues[inputItem.name] = inputItem.value)
-  }
-
-  insertProfileValuesToForm(data) {
-    Object.keys(data).forEach(key => {
-      this._inputList.forEach(inputItem => {
-        if (key === inputItem.name) {
-          inputItem.value = data[key]
-        }
-      })
-    })
+    return this._inputValues
   }
 
   setEventListeners() {
     super.setEventListeners()
-    this._popupForm.addEventListener('submit', () => {
-      this._getInputValues()
-      this._handleFormSubmit(this._inputValues)
+    this._popupForm.addEventListener('submit', evt => {
+      evt.preventDefault()
+      this._handleFormSubmit(this._getInputValues())
     })
   }
 
