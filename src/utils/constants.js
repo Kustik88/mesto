@@ -33,12 +33,10 @@ export const validationSettings = {
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__input-error_visible'
 }
-const popUpImage = document.querySelector('.popup_type_image')
+
 export const btnEditProfile = document.querySelector('.profile__edit-btn')
 export const btnAddCard = document.querySelector('.profile__add-btn')
 const popUpEdit = document.querySelector('.popup_type_profile-edit')
 const popUpCardAdd = document.querySelector('.popup_type_add-card')
 export const formEdit = popUpEdit.querySelector('.popup__form')
 export const formAdd = popUpCardAdd.querySelector('.popup__form')
-export const fieldInputOwner = formEdit.querySelector('input[name=owner]')
-export const fieldInputJob = formEdit.querySelector('input[name=job]')

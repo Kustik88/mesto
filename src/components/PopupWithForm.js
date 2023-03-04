@@ -14,6 +14,10 @@ export default class PopupWithForm extends Popup {
     return this._inputValues
   }
 
+  setInputValues(data) {
+    this._inputList.forEach(inputItem => inputItem.value = data[inputItem.name])
+  }
+
   setEventListeners() {
     super.setEventListeners()
     this._popupForm.addEventListener('submit', evt => {

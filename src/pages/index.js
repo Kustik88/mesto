@@ -12,8 +12,6 @@ import {
   btnAddCard,
   formEdit,
   formAdd,
-  fieldInputOwner,
-  fieldInputJob
 } from "../utils/constants.js"
 
 const userProfile = new UserInfo('.profile__owner', '.profile__job')
@@ -55,8 +53,7 @@ const createCard = dataCard => {
 
 btnEditProfile.addEventListener('click', () => {
   const dataProfile = userProfile.getUserInfo()
-  fieldInputOwner.value = dataProfile.owner
-  fieldInputJob.value = dataProfile.job
+  popupEdit.setInputValues(dataProfile)
   formEditValidator.resetErrors()
   formEditValidator.enableSubmitButton()
   popupEdit.open()
