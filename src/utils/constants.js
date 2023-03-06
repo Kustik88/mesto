@@ -26,12 +26,12 @@ export const initialCards = [
 ]
 
 export const validationSettings = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__submit-btn',
-  inactiveButtonClass: 'popup__submit-btn_inactive',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__input-error_visible'
+  selectorForm: '.popup__form',
+  selectorInput: '.popup__input',
+  selectorSubmitButton: '.popup__submit-btn',
+  classInactiveButton: 'popup__submit-btn_inactive',
+  classInputError: 'popup__input_type_error',
+  classError: 'popup__input-error_visible'
 }
 
 export const btnEditProfile = document.querySelector('.profile__edit-btn')

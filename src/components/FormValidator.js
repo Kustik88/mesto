@@ -2,8 +2,8 @@ export default class FormValidator {
   constructor(config, formElement) {
     this.config = config
     this._formElement = formElement
-    this._submitButton = this._formElement.querySelector(this.config.submitButtonSelector)
-    this._inputList = Array.from(this._formElement.querySelectorAll(this.config.inputSelector))
+    this._submitButton = this._formElement.querySelector(this.config.selectorSubmitButton)
+    this._inputList = Array.from(this._formElement.querySelectorAll(this.config.selectorInput))
   }
 
   enableValidation() {
@@ -28,15 +28,15 @@ export default class FormValidator {
   }
   _showInputError(inputElement, errorMessage) {
     const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`)
-    inputElement.classList.add(this.config.inputErrorClass)
+    inputElement.classList.add(this.config.classInputError)
     errorElement.textContent = errorMessage
-    errorElement.classList.add(this.config.errorClass)
+    errorElement.classList.add(this.config.classError)
   }
 
   _hideInputError(inputElement) {
     const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`)
-    inputElement.classList.remove(this.config.inputErrorClass)
-    errorElement.classList.remove(this.config.errorClass)
+    inputElement.classList.remove(this.config.classInputError)
+    errorElement.classList.remove(this.config.classError)
     errorElement.textContent = ''
   }
 
@@ -56,12 +56,12 @@ export default class FormValidator {
 
   disableSubmitButton = () => {
     this._submitButton.setAttribute('disabled', true)
-    this._submitButton.classList.add(this.config.inactiveButtonClass)
+    this._submitButton.classList.add(this.config.classInactiveButton)
   }
 
   enableSubmitButton = () => {
     this._submitButton.removeAttribute('disabled', true)
-    this._submitButton.classList.remove(this.config.inactiveButtonClass)
+    this._submitButton.classList.remove(this.config.classInactiveButton)
   }
 
   resetErrors() {
