@@ -44,15 +44,14 @@ export default class Card {
   _checkLikeByUser() {
     this._likeList.some(owner => {
       if (owner._id === this._currentUserId) {
-        this._toggleLikeBtn()
+        this.toggleLikeBtn()
       }
     })
   }
 
   _setEventListeners() {
     this._btnLike.addEventListener('click', () => {
-      this._handleLikeClick(this._isLiked),
-      this._toggleLikeBtn()
+      this._handleLikeClick(this._isLiked)
     })
     this._imageCard.addEventListener('click', () => {
       this._handleCardClick(this._name, this._link)
@@ -62,7 +61,7 @@ export default class Card {
     }
   }
 
-  _toggleLikeBtn() {
+  toggleLikeBtn() {
     this._isLiked = !this._isLiked
     this._btnLike.classList.toggle('card__like-icon_active')
   }

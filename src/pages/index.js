@@ -9,10 +9,12 @@ import Section from "../components/Section.js"
 import UserInfo from "../components/UserInfo.js"
 import {
   validationSettings,
+  btnEditAvatarProfile,
   btnEditProfile,
   btnAddCard,
-  formEdit,
-  formAdd,
+  formEditProfile,
+  formAddCard,
+  formEditAvatarProfile
 } from "../utils/constants.js"
 
 let currentUserId
@@ -23,8 +25,9 @@ const api = new Api(
 )
 
 const userProfile = new UserInfo('.profile__owner', '.profile__job', '.profile__avatar')
-const formEditValidator = new FormValidator(validationSettings, formEdit)
-const formAddValidator = new FormValidator(validationSettings, formAdd)
+const formEditProfileValidator = new FormValidator(validationSettings, formEditProfile)
+const formAddCardValidator = new FormValidator(validationSettings, formAddCard)
+const formEditAvatarValidator = new FormValidator(validationSettings, formEditAvatarProfile )
 
 const cardList = new Section({
   renderer: dataCard => {
@@ -67,6 +70,12 @@ const popupEdit = new PopupWithForm({
   }
 }, '.popup_type_profile-edit')
 
+const popupAvatarEdit = new PopupWithForm({
+  handleFormSubmit: () => {
+
+  }
+}, '.popup_type_avatar-edit')
+
 const popupImage = new PopupWithImage('.popup_type_image')
 
 const createCard = dataCard => {
@@ -74,20 +83,15 @@ const createCard = dataCard => {
     handleCardClick: () => {
       popupImage.open(dataCard)
     },
-
     handleLikeClick: isLiked => {
-      if (isLiked) {
-        api.unlikeCard(dataCard._id)
+      (isLiked
+        ? api.unlikeCard(dataCard._id)
+        : api.likeCard(dataCard._id))
           .then(res => card.countLikes(res.likes.length))
+          .then(() => card.toggleLikeBtn())
           .catch(err => displayError(err))
-      } else {
-        api.likeCard(dataCard._id)
-          .then(res => card.countLikes(res.likes.length))
-          .catch(err => displayError(err))
-      }
     },
     handleDeleteBtnClick: () => {
-      popupCardDelete.open()
       popupCardDelete.installFunctionSubmit(() => {
         api.deleteCard(dataCard._id)
         .then(() => card.deleteCard())
@@ -96,6 +100,7 @@ const createCard = dataCard => {
           popupCardDelete.close()
         })
       })
+      popupCardDelete.open()
     }
   })
   const cardElement = card.getCard()
@@ -106,27 +111,35 @@ const displayError = error => {
   console.log(`Ошибка ${error}`)
 }
 
+btnEditAvatarProfile.addEventListener('click', () =>{
+  formEditAvatarValidator.resetErrors()
+  formEditAvatarValidator.disableSubmitButton()
+  popupAvatarEdit.open()
+})
+
 btnEditProfile.addEventListener('click', () => {
   const dataUser = userProfile.getUserInfo()
   popupEdit.setInputValues(dataUser)
-  formEditValidator.resetErrors()
-  formEditValidator.enableSubmitButton()
+  formEditProfileValidator.resetErrors()
+  formEditProfileValidator.enableSubmitButton()
   popupEdit.open()
 })
 
 btnAddCard.addEventListener('click', () => {
-  formAddValidator.resetErrors()
-  formAddValidator.disableSubmitButton()
+  formAddCardValidator.resetErrors()
+  formAddCardValidator.disableSubmitButton()
   popupCardAdd.open()
 })
 
 popupEdit.setEventListeners()
+popupAvatarEdit.setEventListeners()
 popupCardAdd.setEventListeners()
 popupCardDelete.setEventListeners()
 popupImage.setEventListeners()
 
-formAddValidator.enableValidation()
-formEditValidator.enableValidation()
+formAddCardValidator.enableValidation()
+formEditProfileValidator.enableValidation()
+formEditAvatarValidator.enableValidation()
 
 Promise.all([api.getCurrentUser(), api.getCards()])
   .then(([dataUser, dataCards]) => {
