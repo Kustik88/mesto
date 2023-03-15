@@ -12,7 +12,7 @@ export default class Api {
   }
 
   _getJson(res) {
-    if(res.ok) {
+    if (res.ok) {
       return res.json()
     }
     return Promise.reject(`Ошибка ${res.status}`)
@@ -23,10 +23,10 @@ export default class Api {
       method: 'GET',
       headers: this._getHeaders()
     })
-    .then(res => this._getJson(res))
+      .then(res => this._getJson(res))
   }
 
-  changeUserInfo(data){
+  editUserInfo(data) {
     return fetch(`${this._basePath}/users/me`, {
       method: 'PATCH',
       headers: this._getHeaders(),
@@ -35,7 +35,7 @@ export default class Api {
         about: data.job
       })
     })
-    .then(res => this._getJson(res))
+      .then(res => this._getJson(res))
   }
 
   getCards() {
@@ -43,7 +43,7 @@ export default class Api {
       method: 'GET',
       headers: this._getHeaders()
     })
-    .then(res => this._getJson(res))
+      .then(res => this._getJson(res))
   }
 
   addCard(dataCard) {
@@ -55,7 +55,7 @@ export default class Api {
         link: dataCard.link
       })
     })
-    .then(res => this._getJson(res))
+      .then(res => this._getJson(res))
   }
 
   deleteCard(cardId) {
@@ -65,12 +65,12 @@ export default class Api {
     })
   }
 
-  likeCard(dataCardId){
+  likeCard(dataCardId) {
     return fetch(`${this._basePath}/cards/${dataCardId}/likes`, {
       method: 'PUT',
       headers: this._getHeaders(),
     })
-    .then(res => this._getJson(res))
+      .then(res => this._getJson(res))
   }
 
   unlikeCard(dataCardId) {
@@ -78,7 +78,7 @@ export default class Api {
       method: 'DELETE',
       headers: this._getHeaders(),
     })
-    .then(res => this._getJson(res))
+      .then(res => this._getJson(res))
   }
 
   getCardsInfo() {
@@ -86,16 +86,18 @@ export default class Api {
       method: 'GET',
       headers: this._getHeaders(),
     })
-    .then(res => this._getJson(res))
+      .then(res => this._getJson(res))
   }
 
+  editAvatarProfile(urlAvatar) {
+    return fetch(`${this._basePath}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: this._getHeaders(),
+      body: JSON.stringify({
+        avatar: urlAvatar
+      })
+    })
+      .then(res => this._getJson(res))
   }
 
-  // countLikes(id) {
-  //   return fetch(`${this._basePath}/cards/${id}/likes`, {
-  //     method: 'GET',
-  //     headers: this._getHeaders()
-  //   })
-  // }
-
-
+}

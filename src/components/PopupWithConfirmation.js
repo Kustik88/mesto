@@ -5,6 +5,7 @@ export default class PopupWithForm extends Popup {
     super(selectorPopup)
     this._popupForm = this._popup.querySelector('.popup__form')
     this._handleFormSubmit = handleFormSubmit
+    this._btnSubmit = this._popupForm.querySelector('.popup__submit-btn')
   }
 
   setEventListeners() {
@@ -21,11 +22,15 @@ export default class PopupWithForm extends Popup {
 
 
   installFunctionSubmit(func) {
-   this._executorSubmit = func
+    this._executorSubmit = func
 
   }
 
   transferData(data) {
-  this._data = data
+    this._data = data
+  }
+
+  editBtnText(text) {
+    this._btnSubmit.textContent = text
   }
 }

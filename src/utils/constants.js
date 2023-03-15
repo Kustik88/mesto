@@ -6,7 +6,7 @@ export const validationSettings = {
   classInputError: 'popup__input_type_error',
   classError: 'popup__input-error_visible'
 }
-export const btnEditAvatarProfile = document.querySelector('.profile__avatar')
+export const btnEditAvatarProfile = document.querySelector('.profile__edit-avatar-btn')
 export const btnEditProfile = document.querySelector('.profile__edit-btn')
 export const btnAddCard = document.querySelector('.profile__add-btn')
 const popUpEdit = document.querySelector('.popup_type_profile-edit')

@@ -6,6 +6,7 @@ export default class PopupWithForm extends Popup {
     this._popupForm = this._popup.querySelector('.popup__form')
     this._handleFormSubmit = handleFormSubmit
     this._inputList = this._popupForm.querySelectorAll('.popup__input')
+    this._btnSubmit = this._popupForm.querySelector('.popup__submit-btn')
   }
 
   _getInputValues() {
@@ -25,6 +26,10 @@ export default class PopupWithForm extends Popup {
       evt.preventDefault()
       this._handleFormSubmit(this._getInputValues())
     })
+  }
+
+  editBtnText(text) {
+    this._btnSubmit.textContent = text
   }
 
   close() {

@@ -25,7 +25,7 @@
               maxlength="200" required>
             <span class="popup__input-error" id="job-input-error"></span>
           </div>
-          <button type="submit" class="popup__submit-btn">Сохранить</button>
+          <button type="submit" class="popup__submit-btn"></button>
         </form>
       </div>
     </section>
@@ -39,7 +39,7 @@
               required>
             <span class="popup__input-error" id="avatar-input-error"></span>
           </div>
-          <button type="submit" class="popup__submit-btn">Сохранить</button>
+          <button type="submit" class="popup__submit-btn"></button>
         </form>
       </div>
     </section>
@@ -56,7 +56,7 @@
               required>
             <span class="popup__input-error" id="url-input-error"></span>
           </div>
-          <button type="submit" class="popup__submit-btn">Создать</button>
+          <button type="submit" class="popup__submit-btn"></button>
         </form>
       </div>
     </section>
@@ -65,7 +65,7 @@
         <button class="popup__close-btn" aria-label="Закрыть" type="button"></button>
         <form class="popup__form" name="popup-form">
           <h2 class="popup__heading">Вы уверены?</h2>
-          <button type="submit" class="popup__submit-btn">Да</button>
+          <button type="submit" class="popup__submit-btn"></button>
         </form>
       </div>
     </section>
@@ -81,7 +81,10 @@
     </header>
     <main class="content">
       <section class="profile">
-        <img class="profile__avatar" src="" alt="">
+        <button class="profile__edit-avatar-btn" aria-label="Изменить аватар" type="button">
+          <img class="profile__avatar" src="" alt="">
+          <div class="profile__overlay-avatar-btn"></div>
+        </button>
         <div class="profile__info">
           <div class="profile__owner-container">
             <h1 class="profile__owner"></h1>
