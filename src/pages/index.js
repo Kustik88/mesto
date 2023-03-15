@@ -37,9 +37,11 @@ const popupCardAdd = new PopupWithForm({
   handleFormSubmit: data => {
     popupCardAdd.editBtnText('Сохранение...')
     api.addCard(data)
-      .then(res => cardList.addItem(createCard(res), true))
+      .then(res => {
+        cardList.addItem(createCard(res), true),
+        popupCardAdd.close()
+      })
       .catch(err => displayError(err))
-      .finally(() => popupCardAdd.close())
   }
 }, '.popup_type_add-card')
 
@@ -55,10 +57,10 @@ const popupEdit = new PopupWithForm({
         userProfile.setUserInfo({
           name: res.name,
           about: res.about
-        })
+        }),
+        popupEdit.close()
       })
       .catch(err => displayError(err))
-      .finally(() => popupEdit.close())
   }
 }, '.popup_type_profile-edit')
 
@@ -66,9 +68,11 @@ const popupAvatarEdit = new PopupWithForm({
   handleFormSubmit: data => {
     popupAvatarEdit.editBtnText('Сохранение...')
     api.editAvatarProfile(data.avatar)
-      .then(res => userProfile.setUserAvatar(res))
+      .then(res => {
+        userProfile.setUserAvatar(res),
+        popupAvatarEdit.close()
+      })
       .catch(err => displayError(err))
-      .finally(() => popupAvatarEdit.close())
   }
 }, '.popup_type_avatar-edit')
 
@@ -81,16 +85,20 @@ const createCard = dataCard => {
       (isLiked
         ? api.unlikeCard(dataCard._id)
         : api.likeCard(dataCard._id))
-        .then(res => card.countLikes(res.likes.length))
-        .then(() => card.toggleLikeBtn())
+        .then(res => {
+          card.countLikes(res.likes.length),
+          card.toggleLikeBtn()
+        })
         .catch(err => displayError(err))
     },
     handleDeleteBtnClick: () => {
       popupCardDelete.installFunctionSubmit(() => {
         api.deleteCard(dataCard._id)
-          .then(() => card.deleteCard())
+          .then(() => {
+            card.deleteCard(),
+            popupCardDelete.close()
+          })
           .catch(err => displayError(err))
-          .finally(() => popupCardDelete.close())
       })
       popupCardDelete.open()
     }
