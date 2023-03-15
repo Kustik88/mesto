@@ -144,7 +144,6 @@ Promise.all([api.getCurrentUser(), api.getCards()])
     userProfile.setUserAvatar(dataUser)
     userProfile.setUserInfo(dataUser)
     cardList.renderItems(dataCards)
-    console.log(dataCards)
   })
   .catch(err => displayError(err))
 
