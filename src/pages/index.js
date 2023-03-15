@@ -86,9 +86,7 @@ const createCard = dataCard => {
         .catch(err => displayError(err))
     },
     handleDeleteBtnClick: () => {
-      popupCardDelete.editBtnText('Да')
       popupCardDelete.installFunctionSubmit(() => {
-        popupCardDelete.editBtnText('Удаление...')
         api.deleteCard(dataCard._id)
           .then(() => card.deleteCard())
           .catch(err => displayError(err))

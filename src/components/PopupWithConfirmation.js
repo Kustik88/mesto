@@ -29,8 +29,4 @@ export default class PopupWithForm extends Popup {
   transferData(data) {
     this._data = data
   }
-
-  editBtnText(text) {
-    this._btnSubmit.textContent = text
-  }
 }

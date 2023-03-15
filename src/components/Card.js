@@ -57,7 +57,7 @@ export default class Card {
       this._handleCardClick(this._name, this._link)
     })
     if (this._isOwner) {
-      this._btnDelete.addEventListener('click', () => this._handleDeleteBtnClick())
+      this._btnDelete.addEventListener('click', this._handleDeleteBtnClick)
     }
   }
 
