@@ -1,0 +1,7 @@
+.filters__container {
+  width: 95%;
+  margin: 10px auto;
+  display: flex;
+  justify-content: left;
+  column-gap: 10px;
+}
