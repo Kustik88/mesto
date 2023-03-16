@@ -1,7 +1,9 @@
 .filters__container {
-  width: 95%;
-  margin: 10px auto;
+  display: initial;
+  column-gap: 10px;
   display: flex;
   justify-content: left;
-  column-gap: 10px;
+  margin: 10px auto;
+  max-width: 880px;
+  padding: 0;
 }

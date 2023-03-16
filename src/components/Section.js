@@ -10,7 +10,11 @@ export default class Section {
       : this._container.append(element)
   }
 
-  renderItems(cardList, currentUserId) {
-    cardList.forEach(item => this._renderer(item, currentUserId))
+  clearBlock() {
+    this._container.innerHTML=''
+  }
+
+  renderItems(items, currentUserId) {
+    items.forEach(item => this._renderer(item, currentUserId))
   }
 }

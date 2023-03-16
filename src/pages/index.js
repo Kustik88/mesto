@@ -1,4 +1,5 @@
 import './index.css'
+import Sorter from '../components/Sorter.js'
 import Api from '../components/Api.js'
 import FormValidator from "../components/FormValidator.js"
 import Card from "../components/Card.js"
@@ -14,7 +15,8 @@ import {
   btnAddCard,
   formEditProfile,
   formAddCard,
-  formEditAvatarProfile
+  formEditAvatarProfile,
+  btnFilterLikes
 } from "../utils/constants.js"
 
 let currentUserId
@@ -25,6 +27,7 @@ const api = new Api(
 )
 
 const userProfile = new UserInfo('.profile__owner', '.profile__job', '.profile__avatar')
+const filterLikesCard = new Sorter('likes')
 const formEditProfileValidator = new FormValidator(validationSettings, formEditProfile)
 const formAddCardValidator = new FormValidator(validationSettings, formAddCard)
 const formEditAvatarValidator = new FormValidator(validationSettings, formEditAvatarProfile)
@@ -132,6 +135,14 @@ btnAddCard.addEventListener('click', () => {
   formAddCardValidator.resetErrors()
   formAddCardValidator.disableSubmitButton()
   popupCardAdd.open()
+})
+
+btnFilterLikes.addEventListener('click', () => {
+  api.getCards()
+  .then(data => {
+    cardList.clearBlock()
+    cardList.renderItems(filterLikesCard.filterOut(data, currentUserId))
+  })
 })
 
 popupEdit.setEventListeners()
