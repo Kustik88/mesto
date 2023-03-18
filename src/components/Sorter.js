@@ -3,12 +3,15 @@ export default class Sorter {
     this._filteredElement = filteredElement
   }
 
-  filterOut(data) {
-    const sortList =data.sort((current, next) => {
-      return current[this._filteredElement].length - next[this._filteredElement].length
+  sorting(data, ascending = false) {
+    data.sort((current, next) => {
+      if (ascending) {
+        return current[this._filteredElement].length - next[this._filteredElement].length
+      } else {
+        return next[this._filteredElement].length - current[this._filteredElement].length
+      }
     })
-    console.log(sortList)
-    return sortList
+    return data
   }
 
 

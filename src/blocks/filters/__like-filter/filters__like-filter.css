@@ -1,7 +1,17 @@
 .filters__like-filter {
-  width: 40px;
+  width: 80px;
   height: 40px;
   margin-left: 10px;
   padding: 0;
   list-style-type: none;
+  position: relative;
+  cursor: pointer;
+}
+
+.filters__like-filter:hover .filters__dropdown-container{
+  display: block;
+}
+
+.filters__like-filter:hover .filters__btn{
+  background-color: #3e8e41;
 }

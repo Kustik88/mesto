@@ -16,4 +16,6 @@ export const formEditProfile = popUpEdit.querySelector('.popup__form')
 export const formAddCard = popUpCardAdd.querySelector('.popup__form')
 export const formEditAvatarProfile = popupAvatarProfileEdit.querySelector('.popup__form')
 const filterLikes = document.querySelector('.filters__like-filter')
-export const btnFilterLikes = filterLikes.querySelector('.filters__btn')
+export const btnSortLikesDescending = filterLikes.querySelector('.filters__dropdown-btn_type_descending')
+export const btnSortLikesAscending = filterLikes.querySelector('.filters__dropdown-btn_type_ascending')
+

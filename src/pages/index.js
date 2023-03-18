@@ -16,7 +16,8 @@ import {
   formEditProfile,
   formAddCard,
   formEditAvatarProfile,
-  btnFilterLikes
+  btnSortLikesAscending,
+  btnSortLikesDescending
 } from "../utils/constants.js"
 
 let currentUserId
@@ -114,6 +115,15 @@ const displayError = error => {
   console.log(`Ошибка ${error}`)
 }
 
+const sortList = ascendig => {
+  api.getCards()
+  .then(data => {
+    cardList.clearBlock()
+    cardList.renderItems(filterLikesCard.sorting(data, ascendig), currentUserId)
+  })
+  .catch(err => console.log(err))
+}
+
 btnEditAvatarProfile.addEventListener('click', () => {
   popupAvatarEdit.editBtnText('Сохранить')
   formEditAvatarValidator.resetErrors()
@@ -137,12 +147,12 @@ btnAddCard.addEventListener('click', () => {
   popupCardAdd.open()
 })
 
-btnFilterLikes.addEventListener('click', () => {
-  api.getCards()
-  .then(data => {
-    cardList.clearBlock()
-    cardList.renderItems(filterLikesCard.filterOut(data, currentUserId))
-  })
+btnSortLikesAscending.addEventListener('click', () => {
+  sortList(true)
+})
+
+btnSortLikesDescending.addEventListener('click', () => {
+  sortList()
 })
 
 popupEdit.setEventListeners()

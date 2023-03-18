@@ -11,6 +11,6 @@
   border: 0;
 }
 
-.filters__btn:hover{
+.filters__btn:hover .filters____dropdown-container{
   cursor: pointer;
 }
