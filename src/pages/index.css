@@ -41,7 +41,13 @@
 @import url(../blocks/filters/__dropdown-btn/filters__dropdown-btn.css);
 @import url(../blocks/cards/cards.css);
 @import url(../blocks/card/card.css);
+@import url(../blocks/card/__info-owner/card__info-owner.css);
+@import url(../blocks/card/__info-owner/__info-owner_visible/card__info-owner_visible.css);
+@import url(../blocks/card/__avatar-owner/card__avatar-owner.css);
+@import url(../blocks/card/__name-owner/card__name-owner.css);
+@import url(../blocks/card/__job-owner/card__job-owner.css);
 @import url(../blocks/card/__image/card__image.css);
+@import url(../blocks/card/__show-owner-btn/card__show-owner-btn.css);
 @import url(../blocks/card/__delete-btn/card__delete-btn.css);
 @import url(../blocks/card/__delete-btn/_invisible/card__delete-btn_invisible.css);
 @import url(../blocks/card/__info/card__info.css);

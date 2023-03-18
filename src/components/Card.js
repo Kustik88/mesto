@@ -4,6 +4,9 @@ export default class Card {
     this._name = data.name
     this._link = data.link
     this._likeList = data.likes
+    this._nameOwnerCard = data.owner.name
+    this._jobOwnerCard = data.owner.about
+    this._avatarOwnerCard = data.owner.avatar
     this._currentUserId = currentUserId
     this._isOwner = data.owner._id === currentUserId
     this._isLiked = false
@@ -25,7 +28,12 @@ export default class Card {
 
   getCard() {
     this._cardElement = this._getTemplate()
+    this._infoOwner = this._cardElement.querySelector('.card__info-owner')
+    this._avatarOwner = this._cardElement.querySelector('.card__avatar-owner')
+    this._nameOwner = this._cardElement.querySelector('.card__name-owner')
+    this._jobOwner = this._cardElement.querySelector('.card__job-owner')
     this._btnLike = this._cardElement.querySelector('.card__like-icon')
+    this._btnAuthor = this._cardElement.querySelector('.card__show-owner-btn')
     this._checkLikeByUser()
     if (this._isOwner) {
       this._btnDelete = this._cardElement.querySelector('.card__delete-btn')
@@ -34,6 +42,10 @@ export default class Card {
     this._imageCard = this._cardElement.querySelector('.card__image')
     this._counterLike = this._cardElement.querySelector('.card__like-counter')
     this.countLikes(this._likeList.length)
+    this._avatarOwner.src = this._avatarOwnerCard
+    this._avatarOwner.alt = this._nameOwnerCard
+    this._nameOwner.textContent = this._nameOwnerCard
+    this._jobOwner.textContent = this._jobOwnerCard
     this._imageCard.src = this._link
     this._imageCard.alt = this._name
     this._cardElement.querySelector('.card__heading').textContent = this._name
@@ -50,6 +62,14 @@ export default class Card {
   }
 
   _setEventListeners() {
+    this._btnAuthor.addEventListener('click', () => {
+      if(this._infoOwner.classList.contains('card__info-owner_visible')) {
+        this._infoOwner.classList.remove('card__info-owner_visible')
+      } else {
+        this._infoOwner.classList.add('card__info-owner_visible')
+      }
+
+    })
     this._btnLike.addEventListener('click', () => {
       this._handleLikeClick(this._isLiked)
     })
