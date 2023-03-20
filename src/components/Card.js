@@ -22,7 +22,6 @@ export default class Card {
       .content
       .querySelector('.card')
       .cloneNode(true)
-
     return cardElement
   }
 
@@ -68,7 +67,6 @@ export default class Card {
       } else {
         this._infoOwner.classList.add('card__info-owner_visible')
       }
-
     })
     this._btnLike.addEventListener('click', () => {
       this._handleLikeClick(this._isLiked)

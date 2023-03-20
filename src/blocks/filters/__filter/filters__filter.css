@@ -1,4 +1,4 @@
-.filters__like-filter {
+.filters__filter {
   width: 80px;
   height: 40px;
   margin-left: 10px;
@@ -8,10 +8,10 @@
   cursor: pointer;
 }
 
-.filters__like-filter:hover .filters__dropdown-container{
+.filters__filter:hover .filters__dropdown-container{
   display: block;
 }
 
-.filters__like-filter:hover .filters__btn{
+.filters__filter:hover .filters__btn{
   background-color: #3e8e41;
 }

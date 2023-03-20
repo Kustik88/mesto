@@ -14,6 +14,11 @@ export default class Section {
     this._container.innerHTML=''
   }
 
+  findChild(selectorChild) {
+    const child = this._container.querySelector(selectorChild)
+    return child
+  }
+
   renderItems(items, currentUserId) {
     items.forEach(item => this._renderer(item, currentUserId))
   }

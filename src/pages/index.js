@@ -29,6 +29,7 @@ const api = new Api(
 
 const userProfile = new UserInfo('.profile__owner', '.profile__job', '.profile__avatar')
 const filterLikesCard = new Sorter('likes')
+const filterOwnersCard = new Sorter('owner')
 const formEditProfileValidator = new FormValidator(validationSettings, formEditProfile)
 const formAddCardValidator = new FormValidator(validationSettings, formAddCard)
 const formEditAvatarValidator = new FormValidator(validationSettings, formEditAvatarProfile)
@@ -36,6 +37,13 @@ const formEditAvatarValidator = new FormValidator(validationSettings, formEditAv
 const cardList = new Section({
   renderer: dataCard => cardList.addItem(createCard(dataCard))
 }, '.cards')
+
+const sorterOwnerCard = new Section({
+  renderer: data => {
+    createBtnDropdown(data.owner, sorterOwnerCard.findChild('.filters__dropdown-container'))
+    // sorterOwnerCard.addItem(btn)
+  }
+}, '.type_owner-filter')
 
 const popupCardAdd = new PopupWithForm({
   handleFormSubmit: data => {
@@ -81,6 +89,17 @@ const popupAvatarEdit = new PopupWithForm({
 }, '.popup_type_avatar-edit')
 
 const popupImage = new PopupWithImage('.popup_type_image')
+
+const createBtnDropdown = (dataOwner, parent) => {
+  parent.insertAdjacentHTML(
+    'afterbegin',
+    `<button class="filters__dropdown-btn filters__dropdown-btn_type_${dataOwner._id}"
+    aria-label="Показать ${dataOwner.name}"
+    type="button">${dataOwner.name}, ${dataOwner.about}</button>`
+    )
+    // const btnDropdown = parent.querySelector(`.filters__dropdown-btn_type_${dataOwner._id}`)
+    // return btnDropdown
+}
 
 const createCard = dataCard => {
   const card = new Card(dataCard, '#card', currentUserId, {
@@ -171,6 +190,7 @@ Promise.all([api.getCurrentUser(), api.getCards()])
     userProfile.setUserAvatar(dataUser)
     userProfile.setUserInfo(dataUser)
     cardList.renderItems(dataCards)
+    sorterOwnerCard.renderItems(dataCards)
     console.log(dataCards)
   })
   .catch(err => displayError(err))
