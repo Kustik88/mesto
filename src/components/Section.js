@@ -1,7 +1,10 @@
+import { data } from "autoprefixer"
+
 export default class Section {
   constructor({ renderer }, selectorContainer) {
     this._renderer = renderer
     this._container = document.querySelector(selectorContainer)
+    this._isNewContainer = true
   }
 
   addItem(element, isPrepend = false) {
@@ -11,12 +14,29 @@ export default class Section {
   }
 
   clearBlock() {
-    this._container.innerHTML=''
+    this._container.innerHTML = ''
   }
 
-  findChild(selectorChild) {
-    const child = this._container.querySelector(selectorChild)
-    return child
+  changeContainer(selectorBlock) {
+    if (this._isNewContainer) {
+      this._container = this._container.querySelector(`.${selectorBlock}`)
+      this._isNewContainer = !this._isNewContainer
+    }
+  }
+
+  getUniqueOwnersCard(dataCards) {
+    const listUniqueOwnersString = []
+    const listUniqueOwners = []
+    dataCards.forEach(elem => {
+      if(!listUniqueOwnersString.includes(JSON.stringify(elem.owner))){
+      listUniqueOwnersString.push(JSON.stringify(elem.owner))
+      listUniqueOwners.push(elem.owner)
+      }
+    })
+
+   return listUniqueOwners
+
+
   }
 
   renderItems(items, currentUserId) {

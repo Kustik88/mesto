@@ -8,6 +8,7 @@ import PopupWithImage from "../components/PopupWithImage.js"
 import PopupWithConfirmation from "../components/PopupWithConfirmation.js"
 import Section from "../components/Section.js"
 import UserInfo from "../components/UserInfo.js"
+import ButtonDropdown from '../components/ButtonDropdown.js'
 import {
   validationSettings,
   btnEditAvatarProfile,
@@ -38,10 +39,10 @@ const cardList = new Section({
   renderer: dataCard => cardList.addItem(createCard(dataCard))
 }, '.cards')
 
-const sorterOwnerCard = new Section({
+const sorterOwnerCards = new Section({
   renderer: data => {
-    createBtnDropdown(data.owner, sorterOwnerCard.findChild('.filters__dropdown-container'))
-    // sorterOwnerCard.addItem(btn)
+    sorterOwnerCards.changeContainer('filters__dropdown-container')
+    sorterOwnerCards.addItem(createBtnDropdown(data, '.filters__dropdown-btn'))
   }
 }, '.type_owner-filter')
 
@@ -90,13 +91,11 @@ const popupAvatarEdit = new PopupWithForm({
 
 const popupImage = new PopupWithImage('.popup_type_image')
 
-const createBtnDropdown = (dataOwner, parent) => {
-  parent.insertAdjacentHTML(
-    'afterbegin',
-    `<button class="filters__dropdown-btn filters__dropdown-btn_type_${dataOwner._id}"
-    aria-label="Показать ${dataOwner.name}"
-    type="button">${dataOwner.name}, ${dataOwner.about}</button>`
-    )
+const createBtnDropdown = dataOwner => {
+    const btn = new ButtonDropdown(dataOwner, '#btn-dropdown')
+    const btnDrop = btn.getButton()
+    return btnDrop
+
     // const btnDropdown = parent.querySelector(`.filters__dropdown-btn_type_${dataOwner._id}`)
     // return btnDropdown
 }
@@ -138,7 +137,7 @@ const sortList = ascendig => {
   api.getCards()
   .then(data => {
     cardList.clearBlock()
-    cardList.renderItems(filterLikesCard.sorting(data, ascendig), currentUserId)
+    cardList.renderItems(filterLikesCard.sortingAscendingDescending(data, ascendig), currentUserId)
   })
   .catch(err => console.log(err))
 }
@@ -190,8 +189,8 @@ Promise.all([api.getCurrentUser(), api.getCards()])
     userProfile.setUserAvatar(dataUser)
     userProfile.setUserInfo(dataUser)
     cardList.renderItems(dataCards)
-    sorterOwnerCard.renderItems(dataCards)
-    console.log(dataCards)
+    sorterOwnerCards.renderItems(sorterOwnerCards.getUniqueOwnersCard(dataCards))
+
   })
   .catch(err => displayError(err))
 

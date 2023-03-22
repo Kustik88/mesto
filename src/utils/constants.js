@@ -18,4 +18,3 @@ export const formEditAvatarProfile = popupAvatarProfileEdit.querySelector('.popu
 const filterLikes = document.querySelector('.filters__filter')
 export const btnSortLikesDescending = filterLikes.querySelector('.filters__dropdown-btn_type_descending')
 export const btnSortLikesAscending = filterLikes.querySelector('.filters__dropdown-btn_type_ascending')
-

@@ -3,7 +3,7 @@ export default class Sorter {
     this._filteredElement = filteredElement
   }
 
-  sorting(data, ascending = false) {
+  sortingAscendingDescending(data, ascending = false) {
     data.sort((current, next) => {
       if (ascending) {
         return current[this._filteredElement].length - next[this._filteredElement].length
