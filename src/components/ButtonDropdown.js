@@ -1,8 +1,8 @@
 export default class ButtonDropdown {
-  constructor(data, selectorBtnDropdown) {
+  constructor(data, selectorBtnDropdown, {handleButtonClick}) {
     this._data = data
     this._selectorBtn = selectorBtnDropdown
-    // this._handleButtonClick = handleButtonClick
+    this._handleButtonClick = handleButtonClick
   }
 
   _getTemplate() {
@@ -19,6 +19,11 @@ export default class ButtonDropdown {
     this._button.classList.add(`filters__dropdown-btn_type_${this._data._id}`)
     this._button.ariaLabel = `Показать ${this._data._id}`
     this._button.textContent = `${this._data.name}, ${this._data.about}`
+    this._setEventListeners()
     return this._button
+  }
+
+  _setEventListeners() {
+    this._button.addEventListener('click', () => this._handleButtonClick())
   }
 }

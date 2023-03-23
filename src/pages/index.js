@@ -18,10 +18,12 @@ import {
   formAddCard,
   formEditAvatarProfile,
   btnSortLikesAscending,
-  btnSortLikesDescending
+  btnSortLikesDescending,
 } from "../utils/constants.js"
 
 let currentUserId
+let dataCards
+let listUniqueOwnersId
 
 const api = new Api(
   'https://nomoreparties.co/v1/cohort-61',
@@ -42,7 +44,7 @@ const cardList = new Section({
 const sorterOwnerCards = new Section({
   renderer: data => {
     sorterOwnerCards.changeContainer('filters__dropdown-container')
-    sorterOwnerCards.addItem(createBtnDropdown(data, '.filters__dropdown-btn'))
+    sorterOwnerCards.addItem(createBtnDropdown(data))
   }
 }, '.type_owner-filter')
 
@@ -51,6 +53,10 @@ const popupCardAdd = new PopupWithForm({
     popupCardAdd.editBtnText('Сохранение...')
     api.addCard(data)
       .then(res => {
+        if(!listUniqueOwnersId.some(item => item === res.owner._id)) {
+          sorterOwnerCards.addItem(createBtnDropdown(res.owner), true)
+        }
+
         cardList.addItem(createCard(res), true),
         popupCardAdd.close()
       })
@@ -92,11 +98,21 @@ const popupAvatarEdit = new PopupWithForm({
 const popupImage = new PopupWithImage('.popup_type_image')
 
 const createBtnDropdown = dataOwner => {
-    const btn = new ButtonDropdown(dataOwner, '#btn-dropdown')
+    const btn = new ButtonDropdown(dataOwner, '#btn-dropdown', {
+      handleButtonClick: () => {
+        const listCardsOwner = dataCards.filter(card => {
+          if(dataOwner._id === card.owner._id) {
+            return card
+          }
+        })
+        cardList.clearBlock()
+        cardList.renderItems(listCardsOwner)
+      }
+    })
     const btnDrop = btn.getButton()
     return btnDrop
 
-    // const btnDropdown = parent.querySelector(`.filters__dropdown-btn_type_${dataOwner._id}`)
+    // const btnDropdown = parent.querySelector(`#btn-dropdown_type_${dataOwner._id}`)
     // return btnDropdown
 }
 
@@ -184,14 +200,14 @@ formEditProfileValidator.enableValidation()
 formEditAvatarValidator.enableValidation()
 
 Promise.all([api.getCurrentUser(), api.getCards()])
-  .then(([dataUser, dataCards]) => {
+  .then(([dataUser, data]) => {
     currentUserId = dataUser._id
+    dataCards = data
     userProfile.setUserAvatar(dataUser)
     userProfile.setUserInfo(dataUser)
     cardList.renderItems(dataCards)
-    sorterOwnerCards.renderItems(sorterOwnerCards.getUniqueOwnersCard(dataCards))
-
+    const listUniqueOwners = sorterOwnerCards.getUniqueOwnersCard(dataCards)
+    listUniqueOwnersId = listUniqueOwners.map(item => item._id)
+    sorterOwnerCards.renderItems(listUniqueOwners)
   })
   .catch(err => displayError(err))
-
-

@@ -33,11 +33,9 @@ export default class Section {
       listUniqueOwners.push(elem.owner)
       }
     })
-
    return listUniqueOwners
-
-
   }
+
 
   renderItems(items, currentUserId) {
     items.forEach(item => this._renderer(item, currentUserId))
