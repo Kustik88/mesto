@@ -32,7 +32,7 @@ const api = new Api(
 
 const userProfile = new UserInfo('.profile__owner', '.profile__job', '.profile__avatar')
 const filterLikesCard = new Sorter('likes')
-const filterOwnersCard = new Sorter('owner')
+const filterOwnersCard = new Sorter('_id')
 const formEditProfileValidator = new FormValidator(validationSettings, formEditProfile)
 const formAddCardValidator = new FormValidator(validationSettings, formAddCard)
 const formEditAvatarValidator = new FormValidator(validationSettings, formEditAvatarProfile)
@@ -100,20 +100,12 @@ const popupImage = new PopupWithImage('.popup_type_image')
 const createBtnDropdown = dataOwner => {
     const btn = new ButtonDropdown(dataOwner, '#btn-dropdown', {
       handleButtonClick: () => {
-        const listCardsOwner = dataCards.filter(card => {
-          if(dataOwner._id === card.owner._id) {
-            return card
-          }
-        })
         cardList.clearBlock()
-        cardList.renderItems(listCardsOwner)
+        cardList.renderItems(filterOwnersCard.sortOwners(dataCards, dataOwner))
       }
     })
     const btnDrop = btn.getButton()
     return btnDrop
-
-    // const btnDropdown = parent.querySelector(`#btn-dropdown_type_${dataOwner._id}`)
-    // return btnDropdown
 }
 
 const createCard = dataCard => {
@@ -157,6 +149,7 @@ const sortList = ascendig => {
   })
   .catch(err => console.log(err))
 }
+
 
 btnEditAvatarProfile.addEventListener('click', () => {
   popupAvatarEdit.editBtnText('Сохранить')

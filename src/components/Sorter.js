@@ -14,5 +14,12 @@ export default class Sorter {
     return data
   }
 
-
+  sortOwners (dataCards, dataOwner) {
+    const list = dataCards.filter(card => {
+      if(dataOwner[this._filteredElement] === card.owner[this._filteredElement]) {
+        return card
+      }
+    })
+    return list
+  }
 }
